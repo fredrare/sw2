@@ -1,0 +1,23 @@
+Estándar para el nombramiento de elementos en el juego:
+Clases:
+    Deben comenzar con una letra mayúscula y tener todas las palabras juntas, utilizando camel case.
+    No deben contener abreviaciones de las palabras, a no ser que se trate de siglas conocidas por todo el equipo. Por ejemplo, IOT, BD, etc.
+
+Métodos:
+    Deben ser totalmente en minúsculas y tener las palabras separadas por un guión bajo ("_").
+    No deben contener abreviaciones de las palabras, a no ser que se trate de siglas conocidas por todo el equipo. Por ejemplo, iot, bd, etc.
+
+Indentado:
+    La identación que se usará será de 4 espacios. Si se utilizan tabulaciones, estas deben estar traducidas, también, a esta medida.
+
+Espaciado entre operadores:
+    Los operadores de asignación y comparación deben estar separados de sus miembros por un solo espacio por ambos lados.
+
+Comparaciones:
+    La comparación con el operador None no se realizará con el operador de igualdad, sino con la palabra reservada "is" o, en su defecto, "is not".
+    
+Eficiencia:
+    Para no realizar una misma operación múltiples veces, si se ha de usar un resultado en muchas ocasiones, este debe guardarse en una variable. Por ejemplo, si se ejecuta una serie de iteraciones sobre una lista por comprensión, esta debe ejecutarse antes de entrar al bucle y guardarse en un objeto del tipo lista.
+
+Documentación:
+    Para que el cógido sea mantenible y entendible por todos los miembros, este debe tener comentarios en cada método implementado sobre su funcionalidad y, si se tiene alguna operación con una complejidad computacional mayor a O(n²), esta también debe incluir comentarios con respecto a su objetivo e implementación.
