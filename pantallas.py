@@ -1,4 +1,6 @@
 class Pantalla:
+    def __init__(self, gestor):
+        self.gestor = gestor
     def get_input(self):
         pass
     def update(self):
