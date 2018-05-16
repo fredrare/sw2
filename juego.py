@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 # Importar módulos de pantallas y más
 import pygame
+import pantalla_login
 
 # Definir métodos
 
@@ -8,12 +10,12 @@ ancho = 700
 alto = 700
 dimensiones = (ancho, alto)
 # Definir clases
-def GestorPantallas:
+class GestorPantallas:
     def __init__(self):
         pygame.init()
         self.pantalla = pygame.display.set_mode(dimensiones)
         self.superficie = pygame.Surface(self.pantalla.get_size())
-        self.pantalla_actual = pantallas.Pantalla(self)
+        self.pantalla_actual = pantalla_login.PantallaLogin(self)
 
     def comenzar(self):
         while True:

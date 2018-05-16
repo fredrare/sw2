@@ -1,0 +1,6 @@
+1. Deben crear un virtual environment con en comando virtualenv
+2. Deben activar el entorno virtual
+3. Deben instalar recursivamente los requerimientos de requirements.txt con
+    $ pip install -r requirements.txt
+4. ejecutan el juego con
+    $ python juego.py
