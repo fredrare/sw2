@@ -48,8 +48,10 @@ class PantallaLogin(pantallas.Pantalla):
         self.input_usuario.update()
         self.input_password.update()
         if self.registrar.active:
+            self.registrar.active = False
             self.gestor.pantalla_actual.ir_registro()
         if self.login.active:
+            self.login.active = False
             self.login.active = False
             r = requests.get('http://165.227.76.18:3000/login?username=' +
                              self.input_usuario.text +
