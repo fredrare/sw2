@@ -3,7 +3,7 @@ import pantallas
 import text_input
 import config
 import requests
-import pantalla_lobby
+#import pantalla_lobby
 
 class PantallaRegistro(pantallas.PantallaJugador):
     input_usuario = text_input.InputBox(

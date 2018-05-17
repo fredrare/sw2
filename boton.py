@@ -2,7 +2,7 @@ import pygame
 import config
 
 pygame.init()
-COLOR_INACTIVE = pygame.Color(*config.text_input_inactive)
+COLOR_INACTIVE = pygame.Color(255, 255, 255)
 COLOR_ACTIVE = pygame.Color(*config.text_input_active)
 FONT = pygame.font.Font(None, 32)
 
