@@ -5,7 +5,7 @@ import config
 import requests
 import pantalla_lobby
 
-class PantallaRegistro(pantallas.Pantalla):
+class PantallaRegistro(pantallas.PantallaJugador):
     input_usuario = text_input.InputBox(
             (config.ANCHO - config.text_input_ancho) / 2,
             300,
@@ -37,13 +37,16 @@ class PantallaRegistro(pantallas.Pantalla):
                             self.gestor.pantalla_actual.ir_login()
                         else:
                             self.input_password.text = ""
+                            self.input_passwordconfirm.text = ""
                             self.input_usuario.text = ""
             self.input_usuario.handle_event(event)
             self.input_password.handle_event(event)
+            self.input_passwordconfirm.handle_event(event)
 
     def update(self):
         self.input_usuario.update()
         self.input_password.update()
+        self.input_passwordconfirm.update()
     def render(self):
         self.gestor.superficie.fill(config.BACKGROUND_COLOR)
         self.gestor.pantalla.blit(self.gestor.superficie, (0,0))

@@ -4,6 +4,8 @@ import text_input
 import config
 import requests
 import pantalla_lobby
+import pantalla_registro
+import boton
 
 class PantallaLogin(pantallas.Pantalla):
     input_usuario = text_input.InputBox(
@@ -13,9 +15,12 @@ class PantallaLogin(pantallas.Pantalla):
             config.text_input_alto)
     input_password = text_input.InputBox(
             (config.ANCHO - config.text_input_ancho) / 2,
-            500,
+            400,
             config.text_input_ancho,
             config.text_input_alto)
+    font_grande = pygame.font.Font(None, 64)
+    font_chica = pygame.font.Font(None, 32)
+    registrar = boton.Button(360, 500, 100, 40, text = 'Registro')
     def get_input(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -34,18 +39,31 @@ class PantallaLogin(pantallas.Pantalla):
                         self.input_usuario.text = ""
             self.input_usuario.handle_event(event)
             self.input_password.handle_event(event)
+            self.registrar.handle_event(event)
 
     def update(self):
         self.input_usuario.update()
         self.input_password.update()
+        if self.registrar.active:
+            self.gestor.pantalla_actual.ir_registro()
+
     def render(self):
         self.gestor.superficie.fill(config.BACKGROUND_COLOR)
         self.gestor.pantalla.blit(self.gestor.superficie, (0,0))
         self.input_usuario.draw(self.gestor.pantalla)
         self.input_password.draw(self.gestor.pantalla)
+        self.registrar.draw(self.gestor.pantalla)
+        titulo = self.font_grande.render("Login", 1, (255, 255, 0))
+        nombre_usuario = self.font_chica.render("Nombre de usuario", 1, (255, 255, 0))
+        password = self.font_chica.render("Password", 1, (255, 255, 0))
+        self.gestor.pantalla.blit(titulo, (370, 200))
+        self.gestor.pantalla.blit(nombre_usuario, (330, 270))
+        self.gestor.pantalla.blit(password, (380, 370))
         pygame.display.update()
     def ir_lobby(self):
         self.gestor.pantalla_actual = pantalla_lobby.PantallaLobby(self.gestor)
+    def ir_registro(self):
+        self.gestor.pantalla_actual = pantalla_registro.PantallaRegistro(self.gestor)
     def ir_jugador(self):
         pass
     def ir_admin(self):
