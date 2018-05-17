@@ -17,13 +17,16 @@ imagen_Otorongo = pygame.image.load("Imagenes/otorongo.png").convert_alpha()
 posX_Oto,posY_Oto = 150,100
 is_ready = False
 derecha = True
+dere = True
 imagen_ready = pygame.image.load("Imagenes/ready.png")
-
+imagen_peru = pygame.image.load("Imagenes/peru.png")
+postX = 650
+postY = 600
 cambiar_Equipo = boton.Button(400, 550, 100, 40, text = 'Cambiar')
 ready = boton.Button(300, 550, 100, 40, text = 'Ready')
 iniciar = boton.Button(360, 500, 100, 40, text = 'Iniciar')
 salir = boton.Button(650, 650, 100, 40, text = 'Salir')
-
+velocidad = 2
 
 while True:
     ventana.blit(fondo,(0,0))
@@ -36,6 +39,7 @@ while True:
     cambiar_Equipo.draw(ventana)
     ready.draw(ventana)
     salir.draw(ventana)
+    ventana.blit(imagen_peru,(postX,postY))
     if derecha:
         ventana.blit(imagen_Otorongo, (posX_Oto, posY_Oto))
     else:
@@ -59,4 +63,14 @@ while True:
     if salir.active:
         pygame.quit()
         sys.exit()
+    if dere == True:
+        if postX<800:
+                postX+=velocidad
+        else:
+            dere = False
+    else:
+        if postX>1:
+            postX-=velocidad
+        else:
+            dere = True
     pygame.display.update()
