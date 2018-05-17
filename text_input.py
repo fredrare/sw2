@@ -1,8 +1,9 @@
 import pygame
+import config
 
 pygame.init()
-COLOR_INACTIVE = pygame.Color('lightskyblue3')
-COLOR_ACTIVE = pygame.Color('dodgerblue2')
+COLOR_INACTIVE = pygame.Color(*config.text_input_inactive)
+COLOR_ACTIVE = pygame.Color(*config.text_input_active)
 FONT = pygame.font.Font(None, 32)
 
 class InputBox:
@@ -32,7 +33,8 @@ class InputBox:
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
                 else:
-                    self.text += event.unicode
+                    if len(self.text) <= 10:
+                        self.text += event.unicode
                 # Re-render the text.
                 self.txt_surface = FONT.render(self.text, True, self.color)
 

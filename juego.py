@@ -2,13 +2,12 @@
 # Importar módulos de pantallas y más
 import pygame
 import pantalla_login
+import config
 
 # Definir métodos
 
 # Definir constantes
-ancho = 700
-alto = 700
-dimensiones = (ancho, alto)
+dimensiones = (config.ANCHO, config.ALTO)
 # Definir clases
 class GestorPantallas:
     def __init__(self):
