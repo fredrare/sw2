@@ -8,3 +8,5 @@ text_input_active = (0, 0, 0)
 
 text_input_alto = 32
 text_input_ancho = 140
+
+SERVER = 'http://165.227.76.18:3000/'
