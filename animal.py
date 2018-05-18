@@ -8,15 +8,17 @@ class Llama:
 		self.arma = Arma(x,y)
 		self.powerup = None
 		self.sprite = pygame.image.load('llamita.png')
+		self.sprite.set_colorkey((0,0,0))
 
 	def mover(self, cambio):
 		self.x += cambio
+		self.arma.mover(cambio)
 
 	def getPosicion(self):
 		return (self.x, self.y)
 
 	def disparar(self):
-		self.canon.crear_disparo(self.powerup)
+		self.arma.crear_disparo(self.powerup)
 
-	def pintarLlama(self, screen):
-		screen.blit(self.sprite, (self.x, self.y))
+	def pintarLlama(self, fondo):
+		fondo.blit(self.sprite, (self.x, self.y))
