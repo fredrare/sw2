@@ -59,6 +59,12 @@ class PantallaSala(pantallas.Pantalla):
             else:
                 self.dere = True
 
+
+    def nuevopersonaje(self):
+        pass
+
+
+
     def render(self):
         self.gestor.pantalla.blit(self.fondo,(0,0))
         pygame.draw.rect(self.gestor.pantalla,(130,70,70),(150,100,150,100))
