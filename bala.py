@@ -17,7 +17,7 @@ class Bala(pantallas.Pantalla):
         self.xmovimiento = x
         self.ymovimiento = config.ANCHO - self.y
         self.disparo = False
-        self.fondo = pygame.image.load("Imagenes/peru.jpg")
+      self.fondo = pygame.image.load("Imagenes/peru.j")
         self.clock = pygame.time.Clock()
         self.fuente = pygame.font.Font(None, 15)
 
@@ -43,7 +43,7 @@ class Bala(pantallas.Pantalla):
 
     def get_input(self):
         pygame.key.set_repeat(1, 80)
-        tick = self.clock.tick(60)
+        tick = self.clock.tick()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
