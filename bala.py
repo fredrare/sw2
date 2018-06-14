@@ -9,9 +9,11 @@ class Bala(pantallas.Pantalla):
 
     def __init__(self, gestor, x, y):
         self.gestor = gestor
+        self.xinicial = x
+        self.direccion = 1
         self.x = x
         self.y = y
-        self.v = 80
+        self.v = 150
         self.tiempo = 0
         self.angulo = 45
         self.xmovimiento = x
@@ -23,20 +25,20 @@ class Bala(pantallas.Pantalla):
 
     def update(self):
 
-        self.vx = self.v * math.cos(math.radians(self.angulo))
+        self.vx = self.v * math.cos(math.radians(self.angulo))*self.direccion
         self.vy = self.v * math.sin(math.radians(self.angulo))
 
         if self.disparo == True:
             self.xmovimiento = self.vx * self.tiempo
-            self.ymovimiento = self.vy *self.tiempo + (-9.8*(self.tiempo**4)/2)
-            self.x = self.xmovimiento
+            self.ymovimiento = self.vy *self.tiempo + (-50*(self.tiempo**2)/2)
+            self.x = self.xmovimiento + self.xinicial
             self.y = config.ANCHO - self.ymovimiento
 
         else :
             pass
 
         if (self.x > config.ANCHO) or (self.y > config.ALTO):
-            self.x = 0
+            self.x = self.xinicial
             self.y = config.ALTO
             self.tiempo = 0
             self.disparo = False
@@ -57,8 +59,14 @@ class Bala(pantallas.Pantalla):
                 elif event.key == K_SPACE:
                     if self.v < 150  and self.disparo == False:
                         self.v = self.v + 1
-
                 elif event.key == K_RIGHT:
+                    if self.direccion < 0 and self.disparo == False:
+                        self.direccion = -self.direccion
+                elif event.key == K_LEFT:
+                    if self.direccion > 0 and self.disparo == False:
+                        self.direccion = -self.direccion
+                    pass
+                elif event.key == K_RETURN:
                     self.disparo = True
                 elif event.key == K_ESCAPE:
                     sys.exit()
