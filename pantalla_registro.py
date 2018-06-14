@@ -40,7 +40,7 @@ class PantallaRegistro(pantallas.Pantalla):
                         print(self.input_usuario.text)
                         print(self.input_password.text)
                         print(r._content)
-                        if r._content == 'true':
+                        if str(r._content) == 'true':
                             self.gestor.pantalla_actual.ir_login()
                         self.input_password.text = ""
                         self.input_usuario.text = ""
@@ -65,7 +65,7 @@ class PantallaRegistro(pantallas.Pantalla):
                 print(self.input_usuario.text)
                 print(self.input_password.text)
                 print(r._content)
-                if r._content == 'true':
+                if str(r._content) == 'true':
                     self.gestor.pantalla_actual.ir_login()
                 self.input_password.text = ""
                 self.input_usuario.text = ""
