@@ -32,7 +32,7 @@ class PantallaRegistro(pantallas.Pantalla):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    if self.input_password == self.input_passwordconfirm:
+                    if self.input_password.text == self.input_passwordconfirm.text:
                         r = requests.get('http://165.227.76.18:3000/registrar?username=' +
                                          self.input_usuario.text +
                                          '&password=' +
@@ -57,7 +57,7 @@ class PantallaRegistro(pantallas.Pantalla):
             self.gestor.pantalla_actual.ir_login()
         if self.registrar.active:
             self.registrar.active = False
-            if self.input_password == self.input_passwordconfirm:
+            if self.input_password.text == self.input_passwordconfirm.text:
                 r = requests.get('http://165.227.76.18:3000/registrar?username=' +
                                  self.input_usuario.text +
                                  '&password=' +
