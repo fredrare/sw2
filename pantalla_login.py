@@ -3,8 +3,8 @@ import pantallas
 import text_input
 import config
 import requests
-#import pantalla_lobby
 import pantalla_registro
+import pantalla_lobby
 import boton
 
 class PantallaLogin(pantallas.Pantalla):
@@ -27,18 +27,7 @@ class PantallaLogin(pantallas.Pantalla):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    r = requests.get('http://165.227.76.18:3000/login?username=' +
-                                     self.input_usuario.text +
-                                     '&password=' +
-                                     self.input_password.text)
-                    print(self.input_usuario.text)
-                    print(self.input_password.text)
-                    print(r._content)
-                    if r._content == 'true':
-                        self.gestor.pantalla_actual.ir_lobby()
-                    else:
-                        self.input_password.text = ""
-                        self.input_usuario.text = ""
+                    self.login.active = True
             self.input_usuario.handle_event(event)
             self.input_password.handle_event(event)
             self.registrar.handle_event(event)
@@ -52,7 +41,6 @@ class PantallaLogin(pantallas.Pantalla):
             self.gestor.pantalla_actual.ir_registro()
         if self.login.active:
             self.login.active = False
-            self.login.active = False
             r = requests.get('http://165.227.76.18:3000/login?username=' +
                              self.input_usuario.text +
                              '&password=' +
@@ -60,14 +48,18 @@ class PantallaLogin(pantallas.Pantalla):
             print(self.input_usuario.text)
             print(self.input_password.text)
             print(r._content)
-            if r._content == 'true':
+            result = r.content.split('/')
+            if result[0] == 'true':
+                '''if result[1] == 'admin':
+                    self.gestor.pantalla_actual.ir_lobby_admin()
+                elif result[1] == 'user':
+                    self.gestor.pantalla_actual.ir_lobby()'''
                 self.gestor.pantalla_actual.ir_lobby()
             else:
                 self.input_password.text = ""
                 self.input_usuario.text = ""
 
     def render(self):
-        #self.gestor.superficie.fill(config.BACKGROUND_COLOR)
         self.gestor.pantalla.blit(self.gestor.superficie, (0,0))
         self.gestor.pantalla.blit(self.fondo, (0, 0))
         self.input_usuario.draw(self.gestor.pantalla)
@@ -83,8 +75,7 @@ class PantallaLogin(pantallas.Pantalla):
         pygame.display.update()
     def ir_lobby(self):
         print("Se va al Lobby")
-        #self.gestor.pantalla_actual = pantalla_lobby.PantallaLobby(self.gestor)
-        pass
+        self.gestor.pantalla_actual = pantalla_lobby.PantallaLobby(self.gestor)
     def ir_registro(self):
         self.gestor.pantalla_actual = pantalla_registro.PantallaRegistro(self.gestor)
     def ir_jugador(self):

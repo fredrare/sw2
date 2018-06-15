@@ -1,76 +1,39 @@
-import pygame,sys,boton
+import pygame
+import pantallas
+import text_input
+import config
+import requests
+import boton
+import pantalla_login
+import pantalla_sala
 
-from pygame.locals import *
+class PantallaLobby(pantallas.Pantalla):
+    def __init__(self, gestor):
+        self.gestor = gestor
+        self.fondo = pygame.image.load("Imagenes/peru.jpg")
+        self.sala = boton.Button((config.ANCHO - 50)/2, 200, 200, 100, "Sala 1")
+    def get_input(self):
+        for event in pygame.event.get():
+            self.sala.handle_event(event)
 
+    def update(self):
+        if self.sala.active:
+            self.sala.active = False
+            self.gestor.pantalla_actual.ir_sala()
+        pass
+    def render(self):
+        self.gestor.pantalla.blit(self.gestor.superficie, (0,0))
+        self.gestor.pantalla.blit(self.fondo, (0, 0))
+        self.sala.draw(self.gestor.pantalla)
+        pygame.display.update()
 
-pygame.init()
-ventana = pygame.display.set_mode((800,800))
-pygame.display.set_caption("lobby")
+    def ir_login(self):
+        self.gestor.pantalla_actual = pantalla_lobby.PantallaLogin(self.gestor)
+        pass
+    def ir_sala(self):
+        self.gestor.pantalla_actual = pantalla_sala.PantallaSala(self.gestor)
+    def ir_jugador(self):
+        pass
+    def ir_admin(self):
+        pass
 
-fondo = pygame.image.load("Imagenes/peru.jpg")
-
-
-
-
-
-imagen_Otorongo = pygame.image.load("Imagenes/otorongo.png").convert_alpha()
-posX_Oto,posY_Oto = 150,100
-is_ready = False
-derecha = True
-dere = True
-imagen_ready = pygame.image.load("Imagenes/ready.png")
-imagen_peru = pygame.image.load("Imagenes/peru.png")
-postX = 650
-postY = 600
-cambiar_Equipo = boton.Button(400, 550, 100, 40, text = 'Cambiar')
-ready = boton.Button(300, 550, 100, 40, text = 'Ready')
-iniciar = boton.Button(360, 500, 100, 40, text = 'Iniciar')
-salir = boton.Button(650, 650, 100, 40, text = 'Salir')
-velocidad = 2
-
-while True:
-    ventana.blit(fondo,(0,0))
-    pygame.draw.rect(ventana,(130,70,70),(150,100,150,100))
-    pygame.draw.rect(ventana,(130,70,70),(150,250,150,100))
-    pygame.draw.rect(ventana,(130,70,70),(150,400,150,100))
-    pygame.draw.rect(ventana,(130,70,70),(500,100,150,100))
-    pygame.draw.rect(ventana,(130,70,70),(500,250,150,100))
-    pygame.draw.rect(ventana,(130,70,70),(500,400,150,100))
-    cambiar_Equipo.draw(ventana)
-    ready.draw(ventana)
-    salir.draw(ventana)
-    ventana.blit(imagen_peru,(postX,postY))
-    if derecha:
-        ventana.blit(imagen_Otorongo, (posX_Oto, posY_Oto))
-    else:
-        ventana.blit(pygame.transform.flip(imagen_Otorongo, True, False),(550, 100))
-    if is_ready:
-        ventana.blit(imagen_ready,(330,200))
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-        cambiar_Equipo.handle_event(event)
-        ready.handle_event(event)
-        salir.handle_event(event)
-    if cambiar_Equipo.active:
-        derecha = not derecha
-        ventana.blit(imagen_Otorongo,(posX_Oto,posY_Oto))
-        cambiar_Equipo.active = False
-    if ready.active:
-        is_ready = not is_ready
-        ready.active = False
-    if salir.active:
-        pygame.quit()
-        sys.exit()
-    if dere == True:
-        if postX<800:
-                postX+=velocidad
-        else:
-            dere = False
-    else:
-        if postX>1:
-            postX-=velocidad
-        else:
-            dere = True
-    pygame.display.update()
