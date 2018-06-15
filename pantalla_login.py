@@ -4,6 +4,7 @@ import text_input
 import config
 import requests
 import pantalla_registro
+import pantalla_lobby
 import boton
 
 class PantallaLogin(pantallas.Pantalla):
