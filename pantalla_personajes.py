@@ -2,6 +2,8 @@ import pygame, sys, boton
 from pygame.locals import *
 import pantallas
 import pantalla_sala
+#import pantalla_lobby
+#import boton
 
 class Personajes(pantallas.PantallaJugador):
     def __init__(self, gestor):
@@ -111,3 +113,5 @@ class Personajes(pantallas.PantallaJugador):
     def ir_sala(self):
         self.gestor.pantalla_actual = pantalla_sala.PantallaSala(self.gestor)
         pass
+    #def ir_lobby(self):
+        #self.gestor.pantalla_actual = pantalla_lobby.PantallaLobby(self.gestor)

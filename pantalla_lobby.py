@@ -10,7 +10,7 @@ class PantallaLobby(pantallas.Pantalla):
     def __init__(self, gestor):
         self.gestor = gestor
         self.fondo = pygame.image.load("Imagenes/peru.jpg")
-        sala = boton.Boton((config.ANCHO - 50)/2, 200, 200, 100, "Sala 1")
+        self.sala = boton.Button((config.ANCHO - 50)/2, 200, 200, 100, "Sala 1")
     def get_input(self):
         pass
 
@@ -29,4 +29,3 @@ class PantallaLobby(pantallas.Pantalla):
         pass
     def ir_admin(self):
         pass
-
