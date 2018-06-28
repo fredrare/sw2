@@ -13,10 +13,10 @@ class PantallaSala(pantallas.Pantalla):
         self.gestor = gestor
         pygame.display.set_caption("sala")
 
-        self.fondo = pygame.image.load("Imagenes/imagen2.png")
+        self.fondo = pygame.image.load(config.fondo['f1'])
 
-        self.imagen_otorongo = pygame.image.load("Imagenes/Otorongo.png").convert_alpha()
-        self.imagen_llamita = pygame.image.load("Imagenes/Llamita2.png").convert_alpha()
+        self.imagen_otorongo = pygame.image.load(config.avatar['l0']).convert_alpha()
+        self.imagen_llamita = pygame.image.load(config.avatar['l1']).convert_alpha()
         self.posX_Llama,self.posY_Llama = 150,100
         self.is_ready = False
         #self.derecha = True

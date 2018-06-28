@@ -21,10 +21,10 @@ avatar = dict(g0 = 'Imagenes/Personaje/GallitoOriginal.png', p0 = 'Imagenes/Pers
         p2 = 'Imagenes/Personaje/Perro-v2.png', l2 = 'Imagenes/Personaje/llama-v2.png',
         g3 = 'Imagenes/Personaje/Gallito-v3.png', p3 = 'Imagenes/Personaje/Perro-v3.png')
 
-fondo = dict(f1 = 'Imagenes/Fondo/fondo1.jpg', f2 = 'Imagenes/Fondo/fondo2.jpg',
-        f3 = 'Imagenes/Fondo/fondo3.jpg', f4 = 'Imagenes/Fondo/fondo4.jpg',
-        f5 = 'Imagenes/Fondo/fondo5.jpg', f6 = 'Imagenes/Fondo/fondo6.jpg')
+fondo = ['Imagenes/Fondo/fondo1.jpg', 'Imagenes/Fondo/fondo2.jpg',
+        'Imagenes/Fondo/fondo3.jpg', 'Imagenes/Fondo/fondo4.jpg',
+        'Imagenes/Fondo/fondo5.jpg', 'Imagenes/Fondo/fondo6.jpg']
 
-pisos = ['Imagenes/Piso/ladrillo.png', 'Imagenes/Piso/pasto.png',
+piso = ['Imagenes/Piso/ladrillo.png', 'Imagenes/Piso/pasto.png',
         'Imagenes/Piso/pasto2.png', 'Imagenes/Piso/piedra.png']
 BALA = 'Imagenes/BalaDisparo.png'
