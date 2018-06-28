@@ -13,7 +13,7 @@ class PantallaSala(pantallas.Pantalla):
         self.gestor = gestor
         pygame.display.set_caption("sala")
 
-        self.fondo = pygame.image.load(config.fondo['f1'])
+        self.fondo = pygame.image.load(config.fondo[0])
 
         self.imagen_otorongo = pygame.image.load(config.avatar['l0']).convert_alpha()
         self.imagen_llamita = pygame.image.load(config.avatar['l1']).convert_alpha()

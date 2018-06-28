@@ -4,6 +4,7 @@ import text_input
 import config
 import requests
 import pantalla_registro
+import pantalla_lobby
 import boton
 
 class PantallaLogin(pantallas.Pantalla):
@@ -49,10 +50,11 @@ class PantallaLogin(pantallas.Pantalla):
             print(r._content)
             result = r.content.split('/')
             if result[0] == 'true':
-                if result[1] == 'admin':
+                '''if result[1] == 'admin':
                     self.gestor.pantalla_actual.ir_lobby_admin()
                 elif result[1] == 'user':
-                    self.gestor.pantalla_actual.ir_lobby()
+                    self.gestor.pantalla_actual.ir_lobby()'''
+                self.gestor.pantalla_actual.ir_lobby()
             else:
                 self.input_password.text = ""
                 self.input_usuario.text = ""
@@ -73,7 +75,7 @@ class PantallaLogin(pantallas.Pantalla):
         pygame.display.update()
     def ir_lobby(self):
         print("Se va al Lobby")
-        #self.gestor.pantalla_actual = pantalla_lobby.PantallaLobby(self.gestor)
+        self.gestor.pantalla_actual = pantalla_lobby.PantallaLobby(self.gestor)
         pass
     def ir_registro(self):
         self.gestor.pantalla_actual = pantalla_registro.PantallaRegistro(self.gestor)
