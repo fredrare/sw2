@@ -6,7 +6,7 @@ import requests
 import boton
 import sys
 import pantalla_lobby
-import bala
+#import bala
 
 class PantallaSala(pantallas.Pantalla):
     def __init__(self, gestor):
