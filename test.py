@@ -3,7 +3,7 @@
 import pygame
 import config
 import pantalla_sala
-import pantalla_personajes
+
 # Definir métodos
 
 # Definir constantes
@@ -14,7 +14,7 @@ class GestorPantallas:
         pygame.init()
         self.pantalla = pygame.display.set_mode(dimensiones)
         self.superficie = pygame.Surface(self.pantalla.get_size())
-        self.pantalla_actual = pantalla_personajes.Personajes(self)
+        self.pantalla_actual = pantalla_sala.PantallaSala(self)
 
     def comenzar(self):
         while True:
