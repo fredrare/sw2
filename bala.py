@@ -6,10 +6,18 @@ import config
 from pygame.locals import *
 
 class Bala(pantallas.Pantalla):
+    def set_ambiente(self, fondo, piso):
+        self.fondo = pygame.image.load(fondo)
+        self.piso = pygame.image.load(piso)
+
+    def set_jugadores(self, jugador1, jugador2):
+        self.imagen_jugador1 = pygame.image.load(config.avatar[jugador1]).convert_alpha()
+        self.imagen_jugador2 = pygame.image.load(config.avatar[jugador2]).convert_alpha()
 
     def __init__(self, gestor, x, y):
         self.gestor = gestor
-        self.xinicial = x +65
+        self.fin_partida = False
+        self.xinicial = x + 65
         self.direccion = 1
         self.radio = 10
         self.x = x + 65
@@ -20,30 +28,30 @@ class Bala(pantallas.Pantalla):
         self.xmovimiento = x
         self.ymovimiento = config.ANCHO - self.y
         self.disparo = False
-        self.fondo = pygame.image.load("Imagenes/peru.jpg")
         self.clock = pygame.time.Clock()
         self.fuente = pygame.font.Font(None, 15)
-        self.imagen_otorongo = pygame.image.load("Imagenes/Otorongo.png").convert_alpha()
 
     def update(self):
+        if not self.fin_partida:
+            self.vx = self.v * math.cos(math.radians(self.angulo))*self.direccion
+            self.vy = self.v * math.sin(math.radians(self.angulo))
 
-        self.vx = self.v * math.cos(math.radians(self.angulo))*self.direccion
-        self.vy = self.v * math.sin(math.radians(self.angulo))
+            if self.disparo == True:
+                self.xmovimiento = self.vx * self.tiempo
+                self.ymovimiento = self.vy *self.tiempo + (-50*(self.tiempo**2)/2)
+                self.x = self.xmovimiento + self.xinicial
+                self.y = config.ANCHO - self.ymovimiento
+            else :
+                pass
 
-        if self.disparo == True:
-            self.xmovimiento = self.vx * self.tiempo
-            self.ymovimiento = self.vy *self.tiempo + (-50*(self.tiempo**2)/2)
-            self.x = self.xmovimiento + self.xinicial
-            self.y = config.ANCHO - self.ymovimiento
-
-        else :
+            if (self.x > config.ANCHO) or (self.y > config.ALTO):
+                self.x = self.xinicial
+                self.y = config.ALTO
+                self.tiempo = 0
+                self.disparo = False
+        else:
+            # Ir a la pantalla que permite visualizar los resultados
             pass
-
-        if (self.x > config.ANCHO) or (self.y > config.ALTO):
-            self.x = self.xinicial
-            self.y = config.ALTO
-            self.tiempo = 0
-            self.disparo = False
 
     def get_input(self):
         pygame.key.set_repeat(1, 80)
@@ -81,9 +89,9 @@ class Bala(pantallas.Pantalla):
         self.gestor.pantalla.blit(self.fondo,(0,0))
         pygame.draw.circle(self.gestor.pantalla,(155,155,155),(int(self.x),int(self.y)),self.radio)
         if self.direccion > 0  :
-            self.gestor.pantalla.blit(self.imagen_otorongo,(int(self.xinicial-self.radio),config.ALTO-100))
+            self.gestor.pantalla.blit(self.imagen_jugador1,(int(self.xinicial-self.radio),config.ALTO-100))
         else :
-            self.gestor.pantalla.blit(pygame.transform.flip(self.imagen_otorongo,True,False),(int(self.xinicial-self.radio),config.ALTO-100))
+            self.gestor.pantalla.blit(pygame.transform.flip(self.imagen_jugador1,True,False),(int(self.xinicial-self.radio),config.ALTO-100))
 
         pygame.display.update()
 
