@@ -5,6 +5,7 @@ import config
 import requests
 import boton
 import sys
+import bala
 import pantalla_lobby
 #import bala
 
