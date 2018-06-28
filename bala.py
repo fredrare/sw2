@@ -5,59 +5,54 @@ import pantallas
 import config
 import sesion
 import random
+import turnos
 from pygame.locals import *
 
 class Bala(pantallas.Pantalla):
 
     def __init__(self, gestor):
-        x = random.randint(0, config.ANCHO - 100)
+        x = [random.randint(0, config.ANCHO - 100), random.randint(0, config.ANCHO - 100)]
         y = config.ALTO - 150
         self.gestor = gestor
         self.fin_partida = False
-        self.xinicial = x + 65
-        self.direccion = 1
+        self.xinicial = [x[0] + 65, x[1] + 65]
+        self.direccion = [1, 1]
         self.radio = 10
-        self.x = x + 65
+        self.x = [x[0] + 65, x[1] + 65]
         self.y = y - self.radio - 70
         self.v = 150
         self.tiempo = 0
         self.angulo = 45
-        self.xmovimiento = x
+        self.xmovimiento = [x[0], x[1]]
         self.ymovimiento = config.ANCHO - self.y
-        self.disparo[i] = False
+        self.disparo = [False, False]
         self.clock = pygame.time.Clock()
         self.fuente = pygame.font.Font(None, 15)
         self.bala = pygame.image.load(config.BALA)
-        self.sesion = Sesion.get_instance()
+        self.sesion = sesion.Sesion.get_instance()
         self.imagen_jugador = [pygame.image.load(self.sesion.avatar[0]),
                 pygame.image.load(self.sesion.avatar[1])]
-
-    def set_ambiente(self, fondo, piso):
-        self.fondo = pygame.image.load(fondo)
-        self.piso = pygame.image.load(piso)
-
-    def set_jugadores(self, jugador1, jugador2):
-        self.imagen_jugador1 = pygame.image.load(config.avatar[jugador1]).convert_alpha()
-        self.imagen_jugador2 = pygame.image.load(config.avatar[jugador2]).convert_alpha()
+        self.fondo = pygame.image.load(self.sesion.fondo)
+        self.piso = pygame.image.load(self.sesion.piso)
 
     def update(self):
         if not self.fin_partida:
-            self.vx = self.v * math.cos(math.radians(self.angulo))*self.direccion
+            self.vx = self.v * math.cos(math.radians(self.angulo)) * self.direccion[0]
             self.vy = self.v * math.sin(math.radians(self.angulo))
 
-            if self.disparo == True:
-                self.xmovimiento = self.vx * self.tiempo
+            if self.disparo[0] == True:
+                self.xmovimiento[0] = self.vx * self.tiempo
                 self.ymovimiento = self.vy *self.tiempo + (-50*(self.tiempo**2)/2)
-                self.x = self.xmovimiento + self.xinicial
+                self.x[0] = self.xmovimiento[0] + self.xinicial[0]
                 self.y = config.ANCHO - self.ymovimiento
             else :
                 pass
 
-            if (self.x > config.ANCHO) or (self.y > config.ALTO):
-                self.x = self.xinicial
+            if (self.x[0] > config.ANCHO) or (self.y > config.ALTO):
+                self.x[0] = self.xinicial[0]
                 self.y = config.ALTO
                 self.tiempo = 0
-                self.disparo = False
+                self.disparo[0] = False
         else:
             # Ir a la pantalla que permite visualizar los resultados
             pass
@@ -70,38 +65,39 @@ class Bala(pantallas.Pantalla):
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == K_DOWN:
-                    if self.angulo > 0 and self.disparo == False:
+                    if self.angulo > 0 and self.disparo[0] == False:
                         self.angulo = self.angulo - 1
                 elif event.key == K_UP:
-                    if self.angulo < 90  and self.disparo == False:
+                    if self.angulo < 90  and self.disparo[0] == False:
                         self.angulo = self.angulo + 1
                 elif event.key == K_SPACE:
-                    if self.v < 150  and self.disparo == False:
+                    if self.v < 150  and self.disparo[0] == False:
                         self.v = self.v + 1
                 elif event.key == K_RIGHT:
-                    if self.direccion < 0 and self.disparo == False:
-                        self.direccion = -self.direccion
-                    self.x = self.x + 10
-                    self.xinicial = self.xinicial +10
+                    if self.direccion[0] < 0 and self.disparo[0] == False:
+                        self.direccion[0] = -self.direccion[0]
+                    self.x[0] = self.x[0] + 10
+                    self.xinicial[0] = self.xinicial[0] +10
                 elif event.key == K_LEFT:
-                    if self.direccion > 0 and self.disparo == False:
-                        self.direccion = -self.direccion
-                    self.x = self.x - 10
-                    self.xinicial = self.xinicial -10
+                    if self.direccion[0] > 0 and self.disparo[0] == False:
+                        self.direccion[0] = -self.direccion[0]
+                    self.x[0] = self.x[0] - 10
+                    self.xinicial[0] = self.xinicial[0] -10
                 elif event.key == K_RETURN:
-                    self.disparo = True
+                    self.disparo[0] = True
                 elif event.key == K_ESCAPE:
                     sys.exit()
-        if self.disparo == True:
+        if self.disparo[0]:
             self.tiempo = self.tiempo + (tick / 1000.0)
     def render(self):
-        self.gestor.pantalla.blit(self.fondo,(0,0))
-        pygame.draw.circle(self.gestor.pantalla,(155,155,155),(int(self.x),int(self.y)),self.radio)
-        if self.direccion > 0  :
-            self.gestor.pantalla.blit(self.imagen_jugador1,(int(self.xinicial-self.radio),config.ALTO-100))
+        self.gestor.pantalla.blit(self.fondo, (0,0))
+        if self.disparo[0]:
+            pygame.draw.circle(self.gestor.pantalla,(155,155,155),(int(self.x[0]),int(self.y)),self.radio)
+        if self.direccion[0] < 0  :
+            self.gestor.pantalla.blit(self.imagen_jugador[0],(int(self.xinicial[0]-self.radio),config.ALTO-150))
         else :
-            self.gestor.pantalla.blit(pygame.transform.flip(self.imagen_jugador1,True,False),(int(self.xinicial-self.radio),config.ALTO-100))
-
+            self.gestor.pantalla.blit(pygame.transform.flip(self.imagen_jugador[0],True,False),(int(self.xinicial[0]-self.radio),config.ALTO-150))
+        self.gestor.pantalla.blit(self.piso, (0, 550))
         pygame.display.update()
 
 

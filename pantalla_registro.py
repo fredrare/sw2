@@ -8,7 +8,7 @@ import pantalla_registro
 import boton
 
 class PantallaRegistro(pantallas.Pantalla):
-    fondo = pygame.image.load("Imagenes/peru.jpg")
+    fondo = pygame.image.load(config.fondo[0])
     input_usuario = text_input.InputBox(
             (config.ANCHO - config.text_input_ancho) / 2,
             300,
@@ -81,7 +81,7 @@ class PantallaRegistro(pantallas.Pantalla):
         titulo = self.font_grande.render("Registro", 1, (255, 255, 0))
         nombre_usuario = self.font_chica.render("Nombre de usuario", 1, (255, 255, 0))
         password = self.font_chica.render("Password", 1, (255, 255, 0))
-        self.gestor.pantalla.blit(titulo, (370, 200))
+        self.gestor.pantalla.blit(titulo, (360, 200))
         self.gestor.pantalla.blit(nombre_usuario, (330, 270))
         self.gestor.pantalla.blit(password, (380, 370))
         pygame.display.update()

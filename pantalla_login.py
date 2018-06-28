@@ -7,7 +7,7 @@ import pantalla_registro
 import boton
 
 class PantallaLogin(pantallas.Pantalla):
-    fondo = pygame.image.load("Imagenes/peru.jpg")
+    fondo = pygame.image.load(config.fondo[0])
     input_usuario = text_input.InputBox(
             (config.ANCHO - config.text_input_ancho) / 2,
             300,

@@ -7,6 +7,7 @@ class Sesion:
         self.avatar = [config.avatar[avatar1], config.avatar[avatar2]]
         self.vida = [vida, vida]
         self.piso = piso
+        self.fondo = fondo
     @classmethod
     def get_instance(cls):
         if cls.instance is None:
