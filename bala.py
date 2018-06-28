@@ -45,8 +45,6 @@ class Bala(pantallas.Pantalla):
                 self.ymovimiento = self.vy *self.tiempo + (-50*(self.tiempo**2)/2)
                 self.x[0] = self.xmovimiento[0] + self.xinicial[0]
                 self.y = config.ANCHO - self.ymovimiento
-            else :
-                pass
 
             if (self.x[0] > config.ANCHO) or (self.y > config.ALTO):
                 self.x[0] = self.xinicial[0]
@@ -93,13 +91,12 @@ class Bala(pantallas.Pantalla):
         self.gestor.pantalla.blit(self.fondo, (0,0))
         if self.disparo[0]:
             pygame.draw.circle(self.gestor.pantalla,(155,155,155),(int(self.x[0]),int(self.y)),self.radio)
-        if self.direccion[0] < 0  :
+        if self.direccion[0] < 0:
             self.gestor.pantalla.blit(self.imagen_jugador[0],(int(self.xinicial[0]-self.radio),config.ALTO-150))
         else :
             self.gestor.pantalla.blit(pygame.transform.flip(self.imagen_jugador[0],True,False),(int(self.xinicial[0]-self.radio),config.ALTO-150))
         self.gestor.pantalla.blit(self.piso, (0, 550))
         pygame.display.update()
-
 
     def ir_login(self):
         pass
@@ -109,3 +106,4 @@ class Bala(pantallas.Pantalla):
 
     def ir_admin(self):
         pass
+

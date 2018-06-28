@@ -5,6 +5,7 @@ import config
 import requests
 import boton
 import sys
+import bala
 import pantalla_lobby
 import sesion
 #import bala
@@ -15,6 +16,7 @@ class PantallaSala(pantallas.Pantalla):
         self.sesion = sesion.Sesion.get_instance()
         self.gestor = gestor
         pygame.display.set_caption("sala")
+
         self.fondo = pygame.image.load(config.fondo[0])
 
         self.imagen_otorongo = pygame.image.load(config.avatar['l0']).convert_alpha()
