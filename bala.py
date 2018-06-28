@@ -6,13 +6,6 @@ import config
 from pygame.locals import *
 
 class Bala(pantallas.Pantalla):
-    def set_ambiente(self, fondo, piso):
-        self.fondo = pygame.image.load(fondo)
-        self.piso = pygame.image.load(piso)
-
-    def set_jugadores(self, jugador1, jugador2):
-        self.imagen_jugador1 = pygame.image.load(config.avatar[jugador1]).convert_alpha()
-        self.imagen_jugador2 = pygame.image.load(config.avatar[jugador2]).convert_alpha()
 
     def __init__(self, gestor, x, y):
         self.gestor = gestor
@@ -30,6 +23,14 @@ class Bala(pantallas.Pantalla):
         self.disparo = False
         self.clock = pygame.time.Clock()
         self.fuente = pygame.font.Font(None, 15)
+
+    def set_ambiente(self, fondo, piso):
+        self.fondo = pygame.image.load(fondo)
+        self.piso = pygame.image.load(piso)
+
+    def set_jugadores(self, jugador1, jugador2):
+        self.imagen_jugador1 = pygame.image.load(config.avatar[jugador1]).convert_alpha()
+        self.imagen_jugador2 = pygame.image.load(config.avatar[jugador2]).convert_alpha()
 
     def update(self):
         if not self.fin_partida:

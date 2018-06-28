@@ -11,8 +11,16 @@ text_input_ancho = 140
 
 SERVER = 'http://165.227.76.18:3000/'
 
-avatar = dict(g0 = 'GallitoOriginal.png', p0 = 'PerroOriginal.png', c3 = 'Cuy-v3.png', l3 = 'Llama-v3.png',
-        c1 = 'cuy-v1.png', c0 = 'CuyOriginal.png', l0 = 'LlamaOriginal.png', c2 = 'cuy-v2.png',
-        g1 = 'Gallito-v1.png',	p1 = 'Perro-v1.png', l1 = 'llama-v1.png', g2 = 'Gallito-v2.png',
-        p2 = 'Perro-v2.png', l2 = 'llama-v2.png', g3 = 'Gallito-v3.png', p3 = 'Perro-v3.png')
+avatar = dict(g0 = 'Imagenes/Personaje/GallitoOriginal.png', p0 = 'Imagenes/Personaje/PerroOriginal.png',
+        c3 = 'Imagenes/Personaje/Cuy-v3.png', l3 = 'Imagenes/Personaje/Llama-v3.png',
+        c1 = 'Imagenes/Personaje/cuy-v1.png', c0 = 'Imagenes/Personaje/CuyOriginal.png',
+        l0 = 'Imagenes/Personaje/LlamaOriginal.png', c2 = 'Imagenes/Personaje/cuy-v2.png',
+        g1 = 'Imagenes/Personaje/Gallito-v1.png',	p1 = 'Imagenes/Personaje/Perro-v1.png',
+        l1 = 'Imagenes/Personaje/llama-v1.png', g2 = 'Imagenes/Personaje/Gallito-v2.png',
+        p2 = 'Imagenes/Personaje/Perro-v2.png', l2 = 'Imagenes/Personaje/llama-v2.png',
+        g3 = 'Imagenes/Personaje/Gallito-v3.png', p3 = 'Imagenes/Personaje/Perro-v3.png')
+
 fondo = dict()
+
+pisos = ['Imagenes/Piso/ladrillo.png', 'Imagenes/Piso/pasto.png',
+        'Imagenes/Piso/pasto2.png', 'Imagenes/Piso/piedra.png']
