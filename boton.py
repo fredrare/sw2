@@ -4,15 +4,16 @@ import config
 pygame.init()
 COLOR_INACTIVE = pygame.Color(255, 255, 255)
 COLOR_ACTIVE = pygame.Color(*config.text_input_active)
-FONT = pygame.font.Font(None, 32)
+
 
 class Button:
 
-    def __init__(self, x, y, w, h, text=''):
+    def __init__(self, x, y, w, h, text = '', font = 32):
         self.rect = pygame.Rect(x, y, w, h)
         self.color = COLOR_INACTIVE
+        self.font = pygame.font.Font(None, font)
         self.text = text
-        self.txt_surface = FONT.render(text, True, self.color)
+        self.txt_surface = self.font.render(text, True, self.color)
         self.active = False
 
     def handle_event(self, event):
@@ -25,7 +26,7 @@ class Button:
                 self.active = False
             # Change the current color of the input box.
             self.color = COLOR_ACTIVE if self.active else COLOR_INACTIVE
-            self.txt_surface = FONT.render(self.text, True, self.color)
+            self.txt_surface = self.font.render(self.text, True, self.color)
 
     def update(self):
         # Resize the box if the text is too long.
