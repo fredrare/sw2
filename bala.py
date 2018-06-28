@@ -3,6 +3,7 @@ import sys
 import math
 import pantallas
 import config
+import sesion
 from pygame.locals import *
 
 class Bala(pantallas.Pantalla):
@@ -23,6 +24,9 @@ class Bala(pantallas.Pantalla):
         self.disparo = False
         self.clock = pygame.time.Clock()
         self.fuente = pygame.font.Font(None, 15)
+        self.sesion = Sesion.get_instance()
+        self.imagen_jugador = [pygame.image.load(self.sesion.avatar[0]),
+                pygame.image.load(self.sesion.avatar[1])]
 
     def set_ambiente(self, fondo, piso):
         self.fondo = pygame.image.load(fondo)

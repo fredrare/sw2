@@ -1,5 +1,6 @@
-ALTO = 600
+
 ANCHO = 800
+ALTO = 600
 
 BACKGROUND_COLOR = (255, 83, 13)
 
@@ -24,3 +25,4 @@ fondo = dict()
 
 pisos = ['Imagenes/Piso/ladrillo.png', 'Imagenes/Piso/pasto.png',
         'Imagenes/Piso/pasto2.png', 'Imagenes/Piso/piedra.png']
+
