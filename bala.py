@@ -4,11 +4,14 @@ import math
 import pantallas
 import config
 import sesion
+import random
 from pygame.locals import *
 
 class Bala(pantallas.Pantalla):
 
-    def __init__(self, gestor, x, y):
+    def __init__(self, gestor):
+        x = random.randint(0, config.ANCHO - 100)
+        y = config.ALTO - 150
         self.gestor = gestor
         self.fin_partida = False
         self.xinicial = x + 65
@@ -21,9 +24,10 @@ class Bala(pantallas.Pantalla):
         self.angulo = 45
         self.xmovimiento = x
         self.ymovimiento = config.ANCHO - self.y
-        self.disparo = False
+        self.disparoi[] = False
         self.clock = pygame.time.Clock()
         self.fuente = pygame.font.Font(None, 15)
+        self.bala = pygame.image.load(config.BALA)
         self.sesion = Sesion.get_instance()
         self.imagen_jugador = [pygame.image.load(self.sesion.avatar[0]),
                 pygame.image.load(self.sesion.avatar[1])]
