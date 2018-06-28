@@ -24,7 +24,7 @@ class Bala(pantallas.Pantalla):
         self.angulo = 45
         self.xmovimiento = x
         self.ymovimiento = config.ANCHO - self.y
-        self.disparoi[] = False
+        self.disparo[i] = False
         self.clock = pygame.time.Clock()
         self.fuente = pygame.font.Font(None, 15)
         self.bala = pygame.image.load(config.BALA)

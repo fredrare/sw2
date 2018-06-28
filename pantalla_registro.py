@@ -26,8 +26,8 @@ class PantallaRegistro(pantallas.Pantalla):
             config.text_input_alto)
     font_grande = pygame.font.Font(None, 64)
     font_chica = pygame.font.Font(None, 32)
-    registrar = boton.Button(370, 480, 100, 40, text = 'Registrarse')
-    regresar = boton.Button(370, 550, 100, 40, text = 'Regresar')
+    registrar = boton.Button(370, 480, 135, 40, text = 'Registrarse')
+    regresar = boton.Button(370, 550, 110, 40, text = 'Regresar')
     def get_input(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
