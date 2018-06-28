@@ -102,5 +102,6 @@ class Personajes(pantallas.PantallaJugador):
     def ir_personalizar(self):
         self.gestor.pantalla_actual = pantalla_personalizarpersonaje.PantallaPersonalizar(self.gestor)
         pass
-    #def ir_lobby(self):
+
+    
         #self.gestor.pantalla_actual = pantalla_lobby.PantallaLobby(self.gestor)

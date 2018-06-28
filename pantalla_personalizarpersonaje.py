@@ -17,8 +17,7 @@ class PantallaPersonalizar(pantallas.PantallaJugador):
         self.ventana = pygame.display.set_mode((800,800))
         pygame.display.set_caption("listapersonalizacion")
 
-        self.personaje = pygame.image.load("Imagenes/Personajes/CuyOriginal.png") #para probar
-        #self.gestor.pantalla_personajes(self.elegido)  #que jale al personaje elegido
+        self.personaje = self.gestor.pantalla_personajes(self.elegido)  #que jale al personaje elegido
 #Personaje CUY
         self.personajeCuy = pygame.image.load("Imagenes/Personajes/CuyOriginal.png")
         self.posX_PC,self.posY_PC=150,100 #Posicion personaje cuy
@@ -33,7 +32,7 @@ class PantallaPersonalizar(pantallas.PantallaJugador):
         self.seleccionarC2 = boton.Button(150,500,140,40, text = 'CuyV2')
 
         self.personajeCuy3 = pygame.image.load("Imagenes/Personajes/cuy-v3.png")
-        self.posX_PC3,self.posY_P4C3500,100
+        self.posX_PC3,self.posY_PC3=500,100
         self.seleccionarC3 = boton.Button(500,200,140,40, text = 'CuyV3')
 
 #Personaje GALLITO
@@ -101,10 +100,29 @@ class PantallaPersonalizar(pantallas.PantallaJugador):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            self.seleccionar1.handle_event(event)
-            self.seleccionar2.handle_event(event)
-            self.seleccionar3.handle_event(event)
-            self.seleccionar4.handle_event(event)
+            self.seleccionarCuy.handle_event(event)
+            self.seleccionarC1.handle_event(event)
+            self.seleccionarC2.handle_event(event)
+            self.seleccionarC3.handle_event(event)
+
+            self.seleccionarGallito.handle_event(event)
+            self.seleccionarG1.handle_event(event)
+            self.seleccionarG2.handle_event(event)
+            self.seleccionarG3.handle_event(event)
+
+            self.seleccionarLlama.handle_event(event)
+            self.seleccionarL1.handle_event(event)
+            self.seleccionarL2.handle_event(event)
+            self.seleccionarL3.handle_event(event)
+
+            self.seleccionarPerro.handle_event(event)
+            self.seleccionarP1.handle_event(event)
+            self.seleccionarP2.handle_event(event)
+            self.seleccionarP3.handle_event(event)
+            #self.seleccionar1.handle_event(event)
+            #self.seleccionar2.handle_event(event)
+            #self.seleccionar3.handle_event(event)
+            #self.seleccionar4.handle_event(event)
 
             self.atras.handle_event(event)
             self.salir.handle_event(event)
@@ -118,7 +136,7 @@ class PantallaPersonalizar(pantallas.PantallaJugador):
         #    self.gestor.pantalla_actual.ir_sala()
         #elif self.seleccionar4.active:
         #    self.gestor.pantalla_actual.ir_sala()
-        if self.personaje = pygame.image.load("Imagenes/Personajes/CuyOriginal.png") #sicuy
+        #if self.personaje == self.personajeCuy: #pygame.image.load("Imagenes/Personajes/CuyOriginal.png"): #sicuy
             if self.seleccionarC1.active: #si se selecciona la primera version
                 self.personajeCuy = self.personalizarCuy1 #el personaje cambia a primera version
                 #if self.personajeCuy.active:
@@ -131,43 +149,43 @@ class PantallaPersonalizar(pantallas.PantallaJugador):
                 self.personajeCuy = self.personalizarCuy3
                 #if self.personajeCuy.active:
                     #self.gestor.pantalla_actual.ir_juego()
-        elif self.personaje = pygame.image.load("Imagenes/Personajes/GallitoOriginal.png")#si el personaje es gallo
-            if self.seleccionarG1.active:
-                self.personajeGallito = self.personalizarGallito1
+        #elif self.personaje == pygame.image.load("Imagenes/Personajes/GallitoOriginal.png"):#si el personaje es gallo
+        #    if self.seleccionarG1.active:
+        #        self.personajeGallito = self.personalizarGallito1
                 #if self.personajeGallito.active:
                     #self.gestor.pantalla_actual.ir_juego()
-            elif self.seleccionarG2.active:
-                self.personajeGallito = self.personalizarGallito2
+        #    elif self.seleccionarG2.active:
+        #        self.personajeGallito = self.personalizarGallito2
                 #if self.personajeGallito.active:
                     #self.gestor.pantalla_actual.ir_juego()
-            elif self.seleccionarG3.active:
-                self.personajeGallito = self.personalizarGallito3
+        #    elif self.seleccionarG3.active:
+        #        self.personajeGallito = self.personalizarGallito3
                 #if self.personajeGallito.active:
                     #self.gestor.pantalla_actual.ir_juego()
-        elif self.personaje = pygame.image.load("Imagenes/Personajes/PerroOriginal.png") #si el personaje es perro
-            if self.seleccionarP1.active:
-                self.personajePerro = self.personalizarPerro1
+        #elif self.personaje == pygame.image.load("Imagenes/Personajes/PerroOriginal.png"): #si el personaje es perro
+        #    if self.seleccionarP1.active:
+        #        self.personajePerro = self.personalizarPerro1
                 #if self.personajePerro.active:
                     #self.gestor.pantalla_actual.ir_juego()
-            elif self.seleccionarP2.active:
-                self.personajePerro = self.personalizarPerro2
+        #    elif self.seleccionarP2.active:
+        #        self.personajePerro = self.personalizarPerro2
                 #if self.personajePerro.active:
                     #self.gestor.pantalla_actual.ir_juego()
-            elif self.seleccionarP3.active:
-                self.personajePerro = self.personalizarPerro3
+        #    elif self.seleccionarP3.active:
+        #        self.personajePerro = self.personalizarPerro3
                 #if self.personajePerro.active:
                     #self.gestor.pantalla_actual.ir_juego()
-        elif self.personaje = pygame.image.load("Imagenes/Personajes/LlamaOriginal.png") #si el personaje es Llama
-            if self.seleccionarL1.active:
-                self.personajeLlama = self.personalizarLlama1
+        #elif self.personaje == pygame.image.load("Imagenes/Personajes/LlamaOriginal.png"): #si el personaje es Llama
+        #    if self.seleccionarL1.active:
+        #        self.personajeLlama = self.personalizarLlama1
                 #if self.personajeLlama.active:
                     #self.gestor.pantalla_actual.ir_juego()
-            elif self.seleccionarL2.active:
-                self.personajeLlama = self.personalizarLlama2
+        #    elif self.seleccionarL2.active:
+        #        self.personajeLlama = self.personalizarLlama2
                 #if self.personajeLlama.active:
                     #self.gestor.pantalla_actual.ir_juego()
-            elif self.seleccionarL3.active:
-                self.personajeLlama = self.personalizarLlama3
+        #    elif self.seleccionarL3.active:
+        #        self.personajeLlama = self.personalizarLlama3
                 #if self.personajeLlama.active:
                     #self.gestor.pantalla_actual.ir_juego()
 
@@ -182,51 +200,49 @@ class PantallaPersonalizar(pantallas.PantallaJugador):
         pygame.draw.rect(self.ventana,(0,100,205),(150,400,150,100))
         pygame.draw.rect(self.ventana,(210,40,50),(500,100,150,100))
 
-        if self.personaje = pygame.image.load("Imagenes/Personajes/CuyOriginal.png") #si el personaje es cuy
-            self.seleccionarC1.draw(self.ventana)
-            self.seleccionarC2.draw(self.ventana)
-            self.seleccionarC3.draw(self.ventana)
-        elif self.personaje = pygame.image.load("Imagenes/Personajes/GallitoOriginal.png")#si el personaje es gallo
-            self.seleccionarG1.draw(self.ventana)
-            self.seleccionarG2.draw(self.ventana)
-            self.seleccionarG3.draw(self.ventana)
-        elif self.personaje = pygame.image.load("Imagenes/Personajes/LlamaOriginal.png") #si el personaje es Llama
-            self.seleccionarL1.draw(self.ventana)
-            self.seleccionarL2.draw(self.ventana)
-            self.seleccionarL3.draw(self.ventana)
-        elif self.personaje = pygame.image.load("Imagenes/Personajes/PerroOriginal.png") #si el personaje es Perro
-            self.seleccionarP1.draw(self.ventana)
-            self.seleccionarP2.draw(self.ventana)
-            self.seleccionarP3.draw(self.ventana)
+        #if self.personaje == pygame.image.load("Imagenes/Personajes/CuyOriginal.png"): #si el personaje es cuy
+        self.seleccionarC1.draw(self.ventana)
+        self.seleccionarC2.draw(self.ventana)
+        self.seleccionarC3.draw(self.ventana)
+        #elif self.personaje == pygame.image.load("Imagenes/Personajes/GallitoOriginal.png"): #si el personaje es gallo
+        #    self.seleccionarG1.draw(self.ventana)
+        #    self.seleccionarG2.draw(self.ventana)
+        #    self.seleccionarG3.draw(self.ventana)
+        #elif self.personaje == pygame.image.load("Imagenes/Personajes/LlamaOriginal.png"): #si el personaje es Llama
+        #    self.seleccionarL1.draw(self.ventana)
+        #    self.seleccionarL2.draw(self.ventana)
+        #    self.seleccionarL3.draw(self.ventana)
+        #elif self.personaje == pygame.image.load("Imagenes/Personajes/PerroOriginal.png"): #si el personaje es Perro
+        #    self.seleccionarP1.draw(self.ventana)
+        #    self.seleccionarP2.draw(self.ventana)
+        #    self.seleccionarP3.draw(self.ventana)
 
         self.atras.draw(self.ventana)
         self.salir.draw(self.ventana)
 
         if self.situado:
-            if self.personaje = pygame.image.load("Imagenes/Personajes/CuyOriginal.png")
+            #if self.personaje == pygame.image.load("Imagenes/Personajes/CuyOriginal.png"):
                 self.ventana.blit(self.personajeCuy1, (self.posX_PC1, self.posY_PC1))
                 self.ventana.blit(self.personajeCuy2, (self.posX_PC2,self.posY_PC2))
                 self.ventana.blit(self.personajeCuy3, (self.posX_PC3,self.posY_PC3))
                 self.ventana.blit(self.personajeCuy, (self.posX_PC,self.posY_PC))
-            elif self.personaje = pygame.image.load("Imagenes/Personajes/GallitoOriginal.png")
-                self.ventana.blit(self.personajeGallito, (self.posX_PG, self.posY_PG))
-                self.ventana.blit(self.personajeGallito1, (self.posX_PG1,self.posY_PG1))
-                self.ventana.blit(self.personajeGallito2, (self.posX_PG2,self.posY_PG2))
-                self.ventana.blit(self.personajeGallito3, (self.posX_PG3,self.posY_PG3))
-            elif self.personaje = pygame.image.load("Imagenes/Personajes/LlamaOriginal.png")
-                self.ventana.blit(self.personajeLlama, (self.posX_PL, self.posY_PL))
-                self.ventana.blit(self.personajeLlama1, (self.posX_PL1,self.posY_PL1))
-                self.ventana.blit(self.personajeLlama2, (self.posX_PL2,self.posY_PL2))
-                self.ventana.blit(self.personajeLlama3, (self.posX_PL3,self.posY_PL3))
-            elif self.personaje = pygame.image.load("Imagenes/Personajes/PerroOriginal.png")
-                self.ventana.blit(self.personajePerro, (self.posX_PP, self.posY_PP))
-                self.ventana.blit(self.personajePerro1, (self.posX_PP1,self.posY_PP1))
-                self.ventana.blit(self.personajePerro2, (self.posX_PP2,self.posY_PP2))
-                self.ventana.blit(self.personajePerro3, (self.posX_PP3,self.posY_PP3))
+            #elif self.personaje == pygame.image.load("Imagenes/Personajes/GallitoOriginal.png"):
+            #    self.ventana.blit(self.personajeGallito, (self.posX_PG, self.posY_PG))
+            #    self.ventana.blit(self.personajeGallito1, (self.posX_PG1,self.posY_PG1))
+            #    self.ventana.blit(self.personajeGallito2, (self.posX_PG2,self.posY_PG2))
+            #    self.ventana.blit(self.personajeGallito3, (self.posX_PG3,self.posY_PG3))
+            #elif self.personaje == pygame.image.load("Imagenes/Personajes/LlamaOriginal.png"):
+            #    self.ventana.blit(self.personajeLlama, (self.posX_PL, self.posY_PL))
+            #    self.ventana.blit(self.personajeLlama1, (self.posX_PL1,self.posY_PL1))
+            #    self.ventana.blit(self.personajeLlama2, (self.posX_PL2,self.posY_PL2))
+            #    self.ventana.blit(self.personajeLlama3, (self.posX_PL3,self.posY_PL3))
+            #elif self.personaje == pygame.image.load("Imagenes/Personajes/PerroOriginal.png"):
+            #    self.ventana.blit(self.personajePerro, (self.posX_PP, self.posY_PP))
+            #    self.ventana.blit(self.personajePerro1, (self.posX_PP1,self.posY_PP1))
+            #    self.ventana.blit(self.personajePerro2, (self.posX_PP2,self.posY_PP2))
+            #    self.ventana.blit(self.personajePerro3, (self.posX_PP3,self.posY_PP3)) '''
         if self.atras.active:
-            pygame.quit()
-            sys.exit()
-            #self.gestor.pantalla_actual.ir_personajes() #si presiona atras va para escoger personajes
+            self.gestor.pantalla_actual.ir_personajes() #si presiona atras va para escoger personajes
         if self.salir.active:
             pygame.quit()
             sys.exit()
@@ -236,5 +252,5 @@ class PantallaPersonalizar(pantallas.PantallaJugador):
     def ir_sala(self):
         self.gestor.pantalla_actual = pantalla_sala.PantallaSala(self.gestor)
         pass
-    #def ir_personajes(self):
-        #self.gestor.pantalla_actual = pantalla_personajes.Personajes(self.gestor)
+    def ir_personajes(self):
+        self.gestor.pantalla_actual = pantalla_personajes.Personajes(self.gestor)
