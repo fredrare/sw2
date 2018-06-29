@@ -5,15 +5,19 @@ import config
 import requests
 import boton
 import sys
-import pantalla_lobby
 import bala
+import pantalla_lobby
+import sesion
+#import bala
 
 class PantallaSala(pantallas.Pantalla):
+
     def __init__(self, gestor):
+        self.sesion = sesion.Sesion.get_instance()
         self.gestor = gestor
         pygame.display.set_caption("sala")
 
-        self.fondo = pygame.image.load(config.fondo['f1'])
+        self.fondo = pygame.image.load(config.fondo[0])
 
         self.imagen_otorongo = pygame.image.load(config.avatar['l0']).convert_alpha()
         self.imagen_llamita = pygame.image.load(config.avatar['l1']).convert_alpha()
@@ -26,7 +30,8 @@ class PantallaSala(pantallas.Pantalla):
         self.iniciar = boton.Button(350, 450, 100, 40, text = 'Iniciar')
         self.salir = boton.Button(700, 550 , 100, 40, "Salir")
         self.regresar = boton.Button(10, 550 , 100, 40, "Regresar")
-
+        self.cambiar_fondo = boton.Button(330, 350, 160, 40, "Cambiar Fondo" )
+        self.cambiar_piso = boton.Button(330, 250, 160, 40, "Cambiar Piso")
     def get_input(self):
 
         for event in pygame.event.get():
@@ -38,6 +43,8 @@ class PantallaSala(pantallas.Pantalla):
             self.salir.handle_event(event)
             self.regresar.handle_event(event)
             self.iniciar.handle_event(event)
+            self.cambiar_fondo.handle_event(event)
+            self.cambiar_piso.handle_event(event)
 
     def update(self):
         #if self.cambiar_equipo.active:
@@ -54,6 +61,12 @@ class PantallaSala(pantallas.Pantalla):
             self.gestor.pantalla_actual.ir_lobby()
         if self.iniciar.active:
             self.gestor.pantalla_actual.ir_bala()
+        if self.cambiar_fondo.active:
+            self.sesion.fondo = config.fondo[(config.fondo.index(self.sesion.fondo)+1)%len(config.fondo)]
+            self.cambiar_fondo.active = False
+        if self.cambiar_piso.active:
+            self.sesion.piso = config.piso[(config.piso.index(self.sesion.piso)+1)%len(config.piso)]
+            self.cambiar_piso.active = False
 
     def render(self):
         self.gestor.pantalla.blit(self.fondo,(0,0))
@@ -75,6 +88,8 @@ class PantallaSala(pantallas.Pantalla):
         self.salir.draw(self.gestor.pantalla)
         self.iniciar.draw(self.gestor.pantalla)
         self.regresar.draw(self.gestor.pantalla)
+        self.cambiar_fondo.draw(self.gestor.pantalla)
+        self.cambiar_piso.draw(self.gestor.pantalla)
         pygame.display.update()
 
     def ir_bala(self):

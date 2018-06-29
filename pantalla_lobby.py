@@ -12,7 +12,7 @@ class PantallaLobby(pantallas.Pantalla):
     def __init__(self, gestor):
         pygame.display.set_caption("lobby")
         self.gestor = gestor
-        self.fondo = pygame.image.load("Imagenes/Machu_Pichu.png")
+        self.fondo = pygame.image.load(config.fondo[0])
         self.sala1 = boton.Button(300, 280, 250, 80, "Sala 1", 80 )
         self.tienda = boton.Button(700, 70, 90, 50, "Tienda")
         self.salir = boton.Button(700, 550 , 100, 40, "Salir")
