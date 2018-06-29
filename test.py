@@ -4,7 +4,10 @@ import pygame
 import config
 import pantalla_sala
 import pantalla_personajes
-import pantalla_personalizarpersonaje
+import pantalla_versionescuy
+import pantalla_versionesllama
+import pantalla_versionesperro
+import pantalla_versionesgallito
 # Definir métodos
 
 # Definir constantes
@@ -15,7 +18,7 @@ class GestorPantallas:
         pygame.init()
         self.pantalla = pygame.display.set_mode(dimensiones)
         self.superficie = pygame.Surface(self.pantalla.get_size())
-        self.pantalla_actual = pantalla_personalizarpersonaje.PantallaPersonalizar(self)
+        self.pantalla_actual = pantalla_personajes.Personajes(self)
 
     def comenzar(self):
         while True:
