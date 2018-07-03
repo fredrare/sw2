@@ -43,7 +43,7 @@ class Bala(pantallas.Pantalla):
         self.gravedad = -50
         self.getTime = lambda: int(round(time.time() * 1000))
         self.tiempo_inicio = self.getTime()
-        pygame.key.set_repeat(10, 10)
+        pygame.key.set_repeat(10, 5)
 
     def update(self):
         if not self.fin_partida:
@@ -51,9 +51,11 @@ class Bala(pantallas.Pantalla):
             vx = self.v * math.cos(math.radians(self.angulo[self.turno])) * self.direccion[self.turno]
             vy = self.v * math.sin(math.radians(self.angulo[self.turno]))
             if self.disparando[self.turno]:
-                tiempo = self.getTime() - self.tiempo_inicio
-                self.xmovimiento[self.turno] = vx * tiempo
-                self.ymovimiento = vy * tiempo + (self.gravedad * tiempo ** 2 / 2)
+                self.tiempo = (self.getTime() - self.tiempo_inicio) / 400.0
+                # self.tiempo += self.clock.tick() / 1000.0
+                print(self.tiempo)
+                self.xmovimiento[self.turno] = vx * self.tiempo
+                self.ymovimiento = vy * self.tiempo + (self.gravedad * self.tiempo ** 2 / 2)
                 self.x[self.turno] = self.xinicial[self.turno] + self.xmovimiento[self.turno]
                 self.y = self.yinicial - self.ymovimiento
             else:
@@ -62,7 +64,8 @@ class Bala(pantallas.Pantalla):
             if (self.x[self.turno] > config.ANCHO) or (self.y > config.ALTO):
                 self.x[self.turno] = self.xinicial[self.turno]
                 self.y = self.yinicial
-                self.tiempo = self.getTime()
+                self.tiempo = 0
+                self.tiempo_inicio = self.getTime()
                 self.v = 0
                 self.disparando[self.turno] = False
         else:
@@ -70,7 +73,6 @@ class Bala(pantallas.Pantalla):
             pass
 
     def get_input(self):
-        pygame.key.set_repeat(1, 80)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -85,6 +87,7 @@ class Bala(pantallas.Pantalla):
                     elif event.key == K_SPACE:
                         if self.v < 250:
                             self.v += 1
+                        print(self.v)
                     elif event.key == K_RIGHT:
                         if self.direccion[self.turno] < 0:
                             self.direccion[self.turno] = -self.direccion[self.turno]
@@ -102,6 +105,11 @@ class Bala(pantallas.Pantalla):
                     self.cronometro.fin = True
                     pygame.quit()
                     sys.exit()
+                    pygame.event.pump()
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_SPACE] and self.v < 250:
+                self.v += 1
+                print(self.v)
     def render(self):
         self.gestor.pantalla.blit(self.fondo, (0, 0))
         if self.disparando[self.turno]:
