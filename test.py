@@ -3,9 +3,17 @@
 import pygame
 import config
 import pantalla_sala
+<<<<<<< HEAD
+import pantalla_personajes
+import pantalla_versionescuy
+import pantalla_versionesllama
+import pantalla_versionesperro
+import pantalla_versionesgallito
+=======
 
 import pantalla_registro
 #import pantalla_personajes
+>>>>>>> f95a88a630b7d5298c90fd8a9ec92921388bcbd0
 # Definir métodos
 
 # Definir constantes
