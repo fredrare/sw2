@@ -42,6 +42,9 @@ class Llama(pantallas.PantallaJugador):
         self.situado = True
         self.seleccionado = False #flag
 
+        self.sesion = sesion.Sesion.get_instance()
+        self.personaje = None
+
     def get_input(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -108,7 +111,7 @@ class Llama(pantallas.PantallaJugador):
         pygame.display.update()
 
     def ir_sala(self):
-        self.gestor.personajeJugador1 = self.personajeLlama #poner personaje como el personaje del jugador 1
+        self.sesion.avatar[self.sesion.personaje] = self.personaje
         self.gestor.pantalla_actual = pantalla_sala.PantallaSala(self.gestor)
 
     def ir_personajes(self):

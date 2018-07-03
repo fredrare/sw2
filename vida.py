@@ -12,15 +12,17 @@ class Power:
         self.frame = pygame.Rect(x, y, width, height)
         self.load = pygame.Rect(x + 5, y + 5, width - 2, height - 8)
         self.load.w = 0
+        self.life = limit
 
-    def update(self, power):
+    def update(self, life):
         # Resize the box if the text is too long.
-        self.load.w = power * (self.width - 2) / self.limit
+        life = 
+        self.load.w = life * (self.width - 2) / self.limit
 
     def draw(self, screen):
         # Blit the rect.
         pygame.draw.rect(screen, pygame.Color(255, 255, 255), self.frame, 2)
-        pygame.draw.rect(screen, pygame.Color(255, 255, 50), self.load, self.height / 2 + 1)
+        pygame.draw.rect(screen, pygame.Color(255, 255, 0), self.load, self.height / 2 + 1)
 
     def reset(self):
         self.load.w = 0
