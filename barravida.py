@@ -8,8 +8,8 @@ class BarraVida:
     def __init__(self, x, y):
 
         self.rect1 = pygame.Rect(x, y, 100, 20)
-        self.rect2 = pygame.Rect(x+3,y+3,self.vida,18)
         self.vida = 95
+        self.rect2 = pygame.Rect(x+3,y+3,self.vida,18)
         self.colorrojo = pygame.Color(248,0,0)
         self.colornaranja = pygame.Color(255,164,032)
         self.colorverde = pygame.Color(0,247,0)
