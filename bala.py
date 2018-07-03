@@ -4,6 +4,7 @@ import sys
 import math
 import pantallas
 import config
+import poder
 import sesion
 import random
 # import barravida
@@ -43,10 +44,12 @@ class Bala(pantallas.Pantalla):
         self.gravedad = -50
         self.getTime = lambda: int(round(time.time() * 1000))
         self.tiempo_inicio = self.getTime()
+        self.poder = poder.Power(1, 20, config.ANCHO - 2, 20, 250)
         pygame.key.set_repeat(10, 5)
 
     def update(self):
         if not self.fin_partida:
+            self.poder.update(self.v)
             self.turno = 0 if self.cronometro.turno else 1
             vx = self.v * math.cos(math.radians(self.angulo[self.turno])) * self.direccion[self.turno]
             vy = self.v * math.sin(math.radians(self.angulo[self.turno]))
@@ -87,7 +90,6 @@ class Bala(pantallas.Pantalla):
                     elif event.key == K_SPACE:
                         if self.v < 250:
                             self.v += 1
-                        print(self.v)
                     elif event.key == K_RIGHT:
                         if self.direccion[self.turno] < 0:
                             self.direccion[self.turno] = -self.direccion[self.turno]
@@ -109,7 +111,6 @@ class Bala(pantallas.Pantalla):
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE] and self.v < 250:
                 self.v += 1
-                print(self.v)
     def render(self):
         self.gestor.pantalla.blit(self.fondo, (0, 0))
         if self.disparando[self.turno]:
@@ -120,6 +121,7 @@ class Bala(pantallas.Pantalla):
             else :
                 self.gestor.pantalla.blit(pygame.transform.flip(self.imagen_jugador[i], True, False), (int(self.xinicial[i] - self.radio), self.yinicial))
         self.gestor.pantalla.blit(self.piso, (0, 550))
+        self.poder.draw(self.gestor.pantalla)
         # self.barra.draw(self.gestor.pantalla)
         pygame.display.update()
 
