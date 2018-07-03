@@ -6,6 +6,7 @@ import pantallas
 import pantalla_personajes
 import boton
 import config
+import pantalla_sala
 
 class Perro(pantallas.PantallaJugador):
     def __init__(self, gestor):
@@ -28,18 +29,20 @@ class Perro(pantallas.PantallaJugador):
         self.seleccionarP1 = boton.Button(150,350,140,40, text = 'PerroV1')
 
         self.personajePerro2 = pygame.image.load("Imagenes/Personaje/Perro-v2.png")
-        self.posX_PP2,self.posY_PP2=500,250
+        self.posX_PP2,self.posY_PP2=500,100
         self.seleccionarP2 = boton.Button(500,200,140,40, text = 'PerroV2')
 
         self.personajePerro3 = pygame.image.load("Imagenes/Personaje/Perro-v3.png")
-        self.posX_PP3,self.posY_PP3=500,100
-        self.seleccionarP3 = boton.Button(500,200,140,40, text = 'PerroV3')
+        self.posX_PP3,self.posY_PP3=500,250
+        self.seleccionarP3 = boton.Button(500,350,140,40, text = 'PerroV3')
 
-        self.atras = boton.Button(200,500,100,40, text = 'Atras')
-        self.salir = boton.Button(600,500, 100, 40, text = 'Salir')
+        self.definitivo = boton.Button(600,450,130,40,text='Seleccionar') #para seleccionar definitivamente
+        self.reset = boton.Button(200,450,100,40,text = 'Reset')
+        self.atras = boton.Button(200,550,100,40, text = 'Atras')
+        self.salir = boton.Button(600,550, 100, 40, text = 'Salir')
 
         self.situado = True
-        self.seleccionado = False
+        self.seleccionado = False #flag
 
     def get_input(self):
         for event in pygame.event.get():
@@ -52,23 +55,25 @@ class Perro(pantallas.PantallaJugador):
             self.seleccionarP2.handle_event(event)
             self.seleccionarP3.handle_event(event)
 
+            self.definitivo.handle_event(event)
+            self.reset.handle_event(event)
             self.atras.handle_event(event)
             self.salir.handle_event(event)
 
     def update(self):
 
         if self.seleccionarP1.active:
-            self.personajePerro = self.personalizarPerro1
-            if self.personajePerro.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajePerro = self.personajePerro1
+            self.seleccionado =  True
         elif self.seleccionarP2.active:
-            self.personajePerro = self.personalizarPerro2
-            if self.personajePerro.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajePerro = self.personajePerro2
+            self.seleccionado =  True
         elif self.seleccionarP3.active:
-            self.personajePerro = self.personalizarPerro3
-            if self.personajePerro.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajePerro = self.personajePerro3
+            self.seleccionado =  True
+
+        if self.definitivo.active and self.seleccionado: #si lo selecciona definitivamente va para la sala.
+            self.gestor.pantalla_actual.ir_sala()
 
     def render(self):
 
@@ -83,6 +88,8 @@ class Perro(pantallas.PantallaJugador):
         self.seleccionarP2.draw(self.ventana)
         self.seleccionarP3.draw(self.ventana)
 
+        self.definitivo.draw(self.ventana)
+        self.reset.draw(self.ventana)
         self.atras.draw(self.ventana)
         self.salir.draw(self.ventana)
 
@@ -91,6 +98,10 @@ class Perro(pantallas.PantallaJugador):
             self.ventana.blit(self.personajePerro1, (self.posX_PP1,self.posY_PP1))
             self.ventana.blit(self.personajePerro2, (self.posX_PP2,self.posY_PP2))
             self.ventana.blit(self.personajePerro3, (self.posX_PP3,self.posY_PP3))
+
+        if self.reset.active:
+            self.personajePerro = pygame.image.load("Imagenes/Personaje/PerroOriginal.png") #para que se resetee el personaje
+            self.seleccionado = False
         if self.atras.active:
             self.gestor.pantalla_actual.ir_personajes() #si presiona atras va para escoger personajes
         if self.salir.active:
@@ -100,7 +111,8 @@ class Perro(pantallas.PantallaJugador):
         pygame.display.update()
 
     def ir_sala(self):
+        self.gestor.personajeJugador1 = self.personajePerro #poner personaje como el personaje del jugador 1
         self.gestor.pantalla_actual = pantalla_sala.PantallaSala(self.gestor)
-        pass
+
     def ir_personajes(self):
         self.gestor.pantalla_actual = pantalla_personajes.Personajes(self.gestor)

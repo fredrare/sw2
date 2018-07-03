@@ -6,6 +6,7 @@ import pantallas
 import pantalla_personajes
 import boton
 import config
+import pantalla_sala
 
 class Gallo(pantallas.PantallaJugador):
     def __init__(self, gestor):
@@ -29,17 +30,19 @@ class Gallo(pantallas.PantallaJugador):
 
         self.personajeGallito2 = pygame.image.load("Imagenes/Personaje/Gallito-v2.png")
         self.posX_PG2,self.posY_PG2=500,250
-        self.seleccionarG2 = boton.Button(500,350,140,40, text = 'GallitoV2')
+        self.seleccionarG2 = boton.Button(500,200,140,40, text = 'GallitoV2')
 
         self.personajeGallito3 = pygame.image.load("Imagenes/Personaje/Gallito-v3.png")
         self.posX_PG3,self.posY_PG3=500,100
-        self.seleccionarG3 = boton.Button(500,200,140,40, text = 'GallitoV3')
+        self.seleccionarG3 = boton.Button(500,350,140,40, text = 'GallitoV3')
 
-        self.atras = boton.Button(200,500,100,40, text = 'Atras')
-        self.salir = boton.Button(600,500, 100, 40, text = 'Salir')
+        self.definitivo = boton.Button(600,450,130,40,text='Seleccionar') #para seleccionar definitivamente
+        self.reset = boton.Button(200,450,100,40,text = 'Reset')
+        self.atras = boton.Button(200,550,100,40, text = 'Atras')
+        self.salir = boton.Button(600,550, 100, 40, text = 'Salir')
 
         self.situado = True
-        self.seleccionado = False
+        self.seleccionado = False #Flag para saber si ya se selecciono un cuy
 
     def get_input(self):
         for event in pygame.event.get():
@@ -52,22 +55,24 @@ class Gallo(pantallas.PantallaJugador):
             self.seleccionarG2.handle_event(event)
             self.seleccionarG3.handle_event(event)
 
+            self.definitivo.handle_event(event)
+            self.reset.handle_event(event)
             self.atras.handle_event(event)
             self.salir.handle_event(event)
 
     def update(self):
-        if self.seleccionarG1.active:
-            self.personajeGallito = self.personalizarGallito1
-            if self.personajeGallito.active:
-                self.gestor.pantalla_actual.ir_juego()
+        if self.seleccionarG1.active: #si se selecciona la primera version
+            self.personajeGallito = self.personajeGallito1 #el personaje cambia a primera version
+            self.seleccionado = True #cambiar flag a true
         elif self.seleccionarG2.active:
-            self.personajeGallito = self.personalizarGallito2
-            if self.personajeGallito.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajeGallito = self.personajeGallito2
+            self.seleccionado = True
         elif self.seleccionarG3.active:
-            self.personajeGallito = self.personalizarGallito3
-            if self.personajeGallito.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajeGallito = self.personajeGallito3
+            self.seleccionado = True
+
+        if self.definitivo.active and self.seleccionado: #si lo selecciona definitivamente va para la sala.
+            self.gestor.pantalla_actual.ir_sala() #solo puede haber un active a la vez.
 
     def render(self):
 
@@ -82,6 +87,8 @@ class Gallo(pantallas.PantallaJugador):
         self.seleccionarG2.draw(self.ventana)
         self.seleccionarG3.draw(self.ventana)
 
+        self.definitivo.draw(self.ventana)
+        self.reset.draw(self.ventana)
         self.atras.draw(self.ventana)
         self.salir.draw(self.ventana)
 
@@ -92,6 +99,9 @@ class Gallo(pantallas.PantallaJugador):
             self.ventana.blit(self.personajeGallito2, (self.posX_PG2,self.posY_PG2))
             self.ventana.blit(self.personajeGallito3, (self.posX_PG3,self.posY_PG3))
 
+        if self.reset.active:
+            self.personajeGallito = pygame.image.load("Imagenes/Personaje/GallitoOriginal.png") #para que se resetee el personaje
+            self.seleccionado = False
         if self.atras.active:
             self.gestor.pantalla_actual.ir_personajes() #si presiona atras va para escoger personajes
         if self.salir.active:
@@ -101,7 +111,8 @@ class Gallo(pantallas.PantallaJugador):
         pygame.display.update()
 
     def ir_sala(self):
+        self.gestor.personajeJugador1 = self.personajeGallito #poner personaje como el personaje del jugador 1
         self.gestor.pantalla_actual = pantalla_sala.PantallaSala(self.gestor)
-        pass
+
     def ir_personajes(self):
         self.gestor.pantalla_actual = pantalla_personajes.Personajes(self.gestor)

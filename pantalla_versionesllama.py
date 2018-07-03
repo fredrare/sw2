@@ -5,6 +5,7 @@ import pantallas
 import pantalla_personajes
 import boton
 import config
+import pantalla_sala
 
 class Llama(pantallas.PantallaJugador):
     def __init__(self, gestor):
@@ -26,18 +27,20 @@ class Llama(pantallas.PantallaJugador):
         self.seleccionarL1 = boton.Button(150,350,140,40, text = 'LlamaV1')
 
         self.personajeLlama2 = pygame.image.load("Imagenes/Personaje/Llama-v2.png")
-        self.posX_PL2,self.posY_PL2=500,250
-        self.seleccionarL2 = boton.Button(500,350,140,40, text = 'LlamaV2')
+        self.posX_PL2,self.posY_PL2=500,100
+        self.seleccionarL2 = boton.Button(500,200,140,40, text = 'LlamaV2')
 
         self.personajeLlama3 = pygame.image.load("Imagenes/Personaje/Llama-v3.png")
-        self.posX_PL3,self.posY_PL3=500,100
-        self.seleccionarL3 = boton.Button(500,200,140,40, text = 'LlamaV3')
+        self.posX_PL3,self.posY_PL3=500,250
+        self.seleccionarL3 = boton.Button(500,350,140,40, text = 'LlamaV3')
 
-        self.atras = boton.Button(200,500,100,40, text = 'Atras')
-        self.salir = boton.Button(600,500, 100, 40, text = 'Salir')
+        self.definitivo = boton.Button(600,450,130,40,text='Seleccionar') #para seleccionar definitivamente
+        self.reset = boton.Button(200,450,100,40,text = 'Reset')
+        self.atras = boton.Button(200,550,100,40, text = 'Atras')
+        self.salir = boton.Button(600,550, 100, 40, text = 'Salir')
 
         self.situado = True
-        self.seleccionado = False
+        self.seleccionado = False #flag
 
     def get_input(self):
         for event in pygame.event.get():
@@ -50,22 +53,25 @@ class Llama(pantallas.PantallaJugador):
             self.seleccionarL2.handle_event(event)
             self.seleccionarL3.handle_event(event)
 
+            self.definitivo.handle_event(event)
+            self.reset.handle_event(event)
             self.atras.handle_event(event)
             self.salir.handle_event(event)
 
     def update(self):
         if self.seleccionarL1.active:
-            self.personajeLlama = self.personalizarLlama1
-            if self.personajeLlama.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajeLlama = self.personajeLlama1
+            self.seleccionado = True
         elif self.seleccionarL2.active:
-            self.personajeLlama = self.personalizarLlama2
-            if self.personajeLlama.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajeLlama = self.personajeLlama2
+            self.seleccionado = True
         elif self.seleccionarL3.active:
-            self.personajeLlama = self.personalizarLlama3
-            if self.personajeLlama.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajeLlama = self.personajeLlama3
+            self.seleccionado = True
+
+        if self.definitivo.active: #si lo selecciona definitivamente va para la sala.
+            self.gestor.pantalla_actual.ir_sala()
+
     def render(self):
 
         self.ventana.blit(self.fondo,(0,0))
@@ -79,6 +85,8 @@ class Llama(pantallas.PantallaJugador):
         self.seleccionarL2.draw(self.ventana)
         self.seleccionarL3.draw(self.ventana)
 
+        self.definitivo.draw(self.ventana)
+        self.reset.draw(self.ventana)
         self.atras.draw(self.ventana)
         self.salir.draw(self.ventana)
 
@@ -88,6 +96,9 @@ class Llama(pantallas.PantallaJugador):
             self.ventana.blit(self.personajeLlama2, (self.posX_PL2,self.posY_PL2))
             self.ventana.blit(self.personajeLlama3, (self.posX_PL3,self.posY_PL3))
 
+        if self.reset.active:
+            self.personajeLlama = pygame.image.load("Imagenes/Personaje/LlamaOriginal.png") #para que se resetee el personaje
+            self.seleccionado = False
         if self.atras.active:
             self.gestor.pantalla_actual.ir_personajes() #si presiona atras va para escoger personajes
         if self.salir.active:
@@ -97,7 +108,8 @@ class Llama(pantallas.PantallaJugador):
         pygame.display.update()
 
     def ir_sala(self):
+        self.gestor.personajeJugador1 = self.personajeLlama #poner personaje como el personaje del jugador 1
         self.gestor.pantalla_actual = pantalla_sala.PantallaSala(self.gestor)
-        pass
+
     def ir_personajes(self):
         self.gestor.pantalla_actual = pantalla_personajes.Personajes(self.gestor)

@@ -5,6 +5,7 @@ import pantallas
 import pantalla_personajes
 import boton
 import config
+import pantalla_sala
 
 class Cuy(pantallas.PantallaJugador):
     def __init__(self, gestor):
@@ -17,7 +18,6 @@ class Cuy(pantallas.PantallaJugador):
         self.ventana = pygame.display.set_mode((800,600))
         pygame.display.set_caption("listacuy")
 
-
 #Personaje CUY
         self.personajeCuy = pygame.image.load("Imagenes/Personaje/CuyOriginal.png")
         self.posX_PC,self.posY_PC=150,100 #Posicion personaje cuy
@@ -28,19 +28,20 @@ class Cuy(pantallas.PantallaJugador):
         self.seleccionarC1 = boton.Button(150,350,140,40, text = 'CuyV1')
 
         self.personajeCuy2 = pygame.image.load("Imagenes/Personaje/cuy-v2.png")
-        self.posX_PC2,self.posY_PC2=500,250
-        self.seleccionarC2 = boton.Button(500,350,140,40, text = 'CuyV2')
+        self.posX_PC2,self.posY_PC2=500,100
+        self.seleccionarC2 = boton.Button(500,200,140,40, text = 'CuyV2')
 
         self.personajeCuy3 = pygame.image.load("Imagenes/Personaje/cuy-v3.png")
-        self.posX_PC3,self.posY_PC3=500,100
-        self.seleccionarC3 = boton.Button(500,200,140,40, text = 'CuyV3')
+        self.posX_PC3,self.posY_PC3=500,250
+        self.seleccionarC3 = boton.Button(500,350,140,40, text = 'CuyV3')
 
-
-        self.atras = boton.Button(200,500,100,40, text = 'Atras')
-        self.salir = boton.Button(600,500, 100, 40, text = 'Salir')
+        self.definitivo = boton.Button(600,450,130,40,text='Seleccionar') #para seleccionar definitivamente
+        self.reset = boton.Button(200,450,100,40,text = 'Reset')
+        self.atras = boton.Button(200,550,100,40, text = 'Atras')
+        self.salir = boton.Button(600,550, 100, 40, text = 'Salir')
 
         self.situado = True
-        self.seleccionado = False
+        self.seleccionado = False #Flag para saber si ya se selecciono un cuy
 
     def get_input(self):
         for event in pygame.event.get():
@@ -52,22 +53,24 @@ class Cuy(pantallas.PantallaJugador):
             self.seleccionarC2.handle_event(event)
             self.seleccionarC3.handle_event(event)
 
+            self.definitivo.handle_event(event)
+            self.reset.handle_event(event)
             self.atras.handle_event(event)
             self.salir.handle_event(event)
 
-    def update(self):
+    def update(self):  #CAMBIA ESTO!
         if self.seleccionarC1.active: #si se selecciona la primera version
-            self.personajeCuy = self.personalizarCuy1 #el personaje cambia a primera version
-            if self.personajeCuy.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajeCuy = self.personajeCuy1 #el personaje cambia a primera version
+            self.seleccionado = True
         elif self.seleccionarC2.active:
-            self.personajeCuy = self.personalizarCuy2
-            if self.personajeCuy.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajeCuy = self.personajeCuy2
+            self.seleccionado = True
         elif self.seleccionarC3.active:
-            self.personajeCuy = self.personalizarCuy3
-            if self.personajeCuy.active:
-                self.gestor.pantalla_actual.ir_juego()
+            self.personajeCuy = self.personajeCuy3
+            self.seleccionado = True
+
+        if self.definitivo.active and self.seleccionado: #si lo selecciona definitivamente va para la sala.
+            self.gestor.pantalla_actual.ir_sala()
 
     def render(self):
 
@@ -82,6 +85,8 @@ class Cuy(pantallas.PantallaJugador):
         self.seleccionarC2.draw(self.ventana)
         self.seleccionarC3.draw(self.ventana)
 
+        self.definitivo.draw(self.ventana)
+        self.reset.draw(self.ventana)
         self.atras.draw(self.ventana)
         self.salir.draw(self.ventana)
 
@@ -91,6 +96,9 @@ class Cuy(pantallas.PantallaJugador):
             self.ventana.blit(self.personajeCuy3, (self.posX_PC3,self.posY_PC3))
             self.ventana.blit(self.personajeCuy, (self.posX_PC,self.posY_PC))
 
+        if self.reset.active:
+            self.personajeCuy = pygame.image.load("Imagenes/Personaje/CuyOriginal.png") #para que se resetee el personaje
+            self.seleccionado = False
         if self.atras.active:
             self.gestor.pantalla_actual.ir_personajes() #si presiona atras va para escoger personajes
         if self.salir.active:
@@ -100,7 +108,8 @@ class Cuy(pantallas.PantallaJugador):
         pygame.display.update()
 
     def ir_sala(self):
+        self.gestor.personajeJugador1 = self.personajeCuy #poner personaje como el personaje del jugador 1
         self.gestor.pantalla_actual = pantalla_sala.PantallaSala(self.gestor)
-        pass
+
     def ir_personajes(self):
         self.gestor.pantalla_actual = pantalla_personajes.Personajes(self.gestor)

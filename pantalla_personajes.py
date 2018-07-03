@@ -21,7 +21,7 @@ class Personajes(pantallas.PantallaJugador):
         self.ventana = pygame.display.set_mode((800,600))
         pygame.display.set_caption("listapersonajes")
 
-        self.elegido = pygame.image.load("Imagenes/peru.png")#iniciar con ninguno default peru
+        self.elegido = pygame.image.load("Imagenes/peru.jpg")#iniciar con ninguno default peru
 
         self.personaje1 = pygame.image.load("Imagenes/Personaje/CuyOriginal.png")
         self.posX_P1,self.posY_P1=150,100
@@ -64,10 +64,13 @@ class Personajes(pantallas.PantallaJugador):
             self.elegido = self.personaje1 #el cuy se vuelve el elegido
             self.gestor.pantalla_actual.ir_personalizarcuy() #SE REDIRIGE A LA PAGINA SOLO DE VERSIONES DE CUY
         elif self.seleccionar2.active:
+            self.elegido = self.personaje2
             self.gestor.pantalla_actual.ir_personalizargallito() #SOLO DE GALLITOS
         elif self.seleccionar3.active:
+            self.elegido = self.personaje3
             self.gestor.pantalla_actual.ir_personalizarllama() #SOLO DE LLAMAS
         elif self.seleccionar4.active:
+            self.elegido = self.personaje4
             self.gestor.pantalla_actual.ir_personalizarperro() #SOLO DE PERROS
 
     def render(self):
