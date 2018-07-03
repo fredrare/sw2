@@ -7,6 +7,7 @@ import pantalla_personajes
 import boton
 import config
 import pantalla_sala
+import sesion
 
 class Gallo(pantallas.PantallaJugador):
     def __init__(self, gestor):
