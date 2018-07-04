@@ -19,19 +19,19 @@ class Llama(pantallas.PantallaJugador):
         self.ventana = pygame.display.set_mode((800,600))
         pygame.display.set_caption("listapersonalizacion")
 
-        self.personajeLlama = pygame.image.load("Imagenes/Personaje/LlamaOriginal.png")
+        self.personajeLlama = pygame.image.load(config.avatar['l0'])
         self.posX_PL,self.posY_PL=150,100 #Posicion personaje Llama
         self.seleccionarLlama = boton.Button(150,200,140,40, text = 'LlamaBase')
 
-        self.personajeLlama1 = pygame.image.load("Imagenes/Personaje/Llama-v1.png")
+        self.personajeLlama1 = pygame.image.load(config.avatar['l1'])
         self.posX_PL1,self.posY_PL1=150,250
         self.seleccionarL1 = boton.Button(150,350,140,40, text = 'LlamaV1')
 
-        self.personajeLlama2 = pygame.image.load("Imagenes/Personaje/Llama-v2.png")
+        self.personajeLlama2 = pygame.image.load(config.avatar['l2'])
         self.posX_PL2,self.posY_PL2=500,100
         self.seleccionarL2 = boton.Button(500,200,140,40, text = 'LlamaV2')
 
-        self.personajeLlama3 = pygame.image.load("Imagenes/Personaje/Llama-v3.png")
+        self.personajeLlama3 = pygame.image.load(config.avatar['l3'])
         self.posX_PL3,self.posY_PL3=500,250
         self.seleccionarL3 = boton.Button(500,350,140,40, text = 'LlamaV3')
 
@@ -64,12 +64,15 @@ class Llama(pantallas.PantallaJugador):
 
     def update(self):
         if self.seleccionarL1.active:
+            self.personaje = pygame.image.load(config.avatar['l1'])
             self.personajeLlama = self.personajeLlama1
             self.seleccionado = True
         elif self.seleccionarL2.active:
+            self.personaje = pygame.image.load(config.avatar['l2'])
             self.personajeLlama = self.personajeLlama2
             self.seleccionado = True
         elif self.seleccionarL3.active:
+            self.personaje = pygame.image.load(config.avatar['l3'])
             self.personajeLlama = self.personajeLlama3
             self.seleccionado = True
 
@@ -101,7 +104,8 @@ class Llama(pantallas.PantallaJugador):
             self.ventana.blit(self.personajeLlama3, (self.posX_PL3,self.posY_PL3))
 
         if self.reset.active:
-            self.personajeLlama = pygame.image.load("Imagenes/Personaje/LlamaOriginal.png") #para que se resetee el personaje
+            self.personaje = config.avatar['l0']
+            self.personajeLlama = pygame.image.load(config.avatar['l0']) #para que se resetee el personaje
             self.seleccionado = False
         if self.atras.active:
             self.gestor.pantalla_actual.ir_personajes() #si presiona atras va para escoger personajes
