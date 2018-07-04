@@ -38,7 +38,8 @@ class PantallaSala(pantallas.Pantalla):
         self.cambiar_fondo = boton.Button(330, 350, 160, 40, "Cambiar Fondo" )
         self.cambiar_piso = boton.Button(330, 250, 160, 40, "Cambiar Piso")
 
-        self.cambiar_personaje = boton.Button(330,150,160,40, "Cambiar Personaje")
+        self.cambiar_personaje1 = boton.Button(150,250,160,40, "Cambiar Personaje")
+        self.cambiar_personaje2 = boton.Button(500,250,160,40, "Cambiar Personaje")
     def get_input(self):
 
         for event in pygame.event.get():
@@ -52,7 +53,8 @@ class PantallaSala(pantallas.Pantalla):
             self.iniciar.handle_event(event)
             self.cambiar_fondo.handle_event(event)
             self.cambiar_piso.handle_event(event)
-            self.cambiar_personaje.handle_event(event)
+            self.cambiar_personaje1.handle_event(event)
+            self.cambiar_personaje2.handle_event(event)
 
     def update(self):
         #if self.cambiar_equipo.active:
@@ -75,8 +77,14 @@ class PantallaSala(pantallas.Pantalla):
         if self.cambiar_piso.active:
             self.sesion.piso = config.piso[(config.piso.index(self.sesion.piso)+1)%len(config.piso)]
             self.cambiar_piso.active = False
-        if self.cambiar_personaje.active:
+        if self.cambiar_personaje1.active:
             self.gestor.pantalla_actual.ir_personaje()
+            self.sesion.personaje = 0
+            self.cambiar_personaje1.active = False
+        if self.cambiar_personaje2.active:
+            self.gestor.pantalla_actual.ir_personaje()
+            self.sesion.personaje = 1
+            self.cambiar_personaje2.active = False
 
     def render(self):
         self.gestor.pantalla.blit(self.fondo,(0,0))
@@ -100,7 +108,8 @@ class PantallaSala(pantallas.Pantalla):
         self.regresar.draw(self.gestor.pantalla)
         self.cambiar_fondo.draw(self.gestor.pantalla)
         self.cambiar_piso.draw(self.gestor.pantalla)
-        self.cambiar_personaje.draw(self.gestor.pantalla)
+        self.cambiar_personaje1.draw(self.gestor.pantalla)
+        self.cambiar_personaje2.draw(self.gestor.pantalla)
         pygame.display.update()
 
     def ir_bala(self):
