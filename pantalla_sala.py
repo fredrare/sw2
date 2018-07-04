@@ -24,8 +24,8 @@ class PantallaSala(pantallas.Pantalla):
 
         self.fondo = pygame.image.load(config.fondo[0])
 
-        self.imagen_jugador_2 = pygame.image.load(config.avatar['l1']).convert_alpha()
-        self.imagen_jugador_1 = gestor.personajeJugador1
+        self.imagen_jugador_1 = pygame.image.load(self.sesion.avatar[0]).convert_alpha()
+        self.imagen_jugador_2 = pygame.image.load(self.sesion.avatar[1]).convert_alpha()
         self.posX_Llama,self.posY_Llama = 150,100
         self.is_ready = False
         #self.derecha = True

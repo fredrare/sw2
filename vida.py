@@ -3,26 +3,29 @@ import config
 
 pygame.init()
 
-class Power:
+class Vida:
 
     def __init__(self, x, y, width, height, limit):
         self.height = height
         self.width = width
         self.limit = limit
         self.frame = pygame.Rect(x, y, width, height)
-        self.load = pygame.Rect(x + 5, y + 5, width - 2, height - 8)
-        self.load.w = 0
-        self.life = limit
+        self.life = pygame.Rect(x + 5, y + 5, width - 2, height - 8)
+        self.ammount = limit
+        self.life.w = self.ammount * (self.width - 2) / self.limit
 
-    def update(self, life):
+    def update(self, hit):
         # Resize the box if the text is too long.
-        life = 
-        self.load.w = life * (self.width - 2) / self.limit
+        self.ammount -= hit
+        self.life.w = self.ammount * (self.width - 2) / self.limit
 
     def draw(self, screen):
         # Blit the rect.
-        pygame.draw.rect(screen, pygame.Color(255, 255, 255), self.frame, 2)
-        pygame.draw.rect(screen, pygame.Color(255, 255, 0), self.load, self.height / 2 + 1)
+        pygame.draw.rect(screen, pygame.Color(0, 0, 0), self.frame, 2)
+        pygame.draw.rect(screen, pygame.Color(
+            255 * (self.limit - self.ammount) / self.limit,
+            255 * (1 - (self.limit - self.ammount) / self.limit),
+            0), self.life, self.height / 2)
 
     def reset(self):
         self.load.w = 0

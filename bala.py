@@ -7,6 +7,7 @@ import config
 import poder
 import sesion
 import random
+import vida
 # import barravida
 import turnos
 from pygame.locals import *
@@ -18,16 +19,16 @@ class Bala(pantallas.Pantalla):
         y = config.ALTO - 100
         self.gestor = gestor
         self.fin_partida = False
-        self.xinicial = [x[0] + 65, x[1] + 65]
+        self.xinicial = [i + 65 for i in x]
         self.yinicial= config.ALTO - 150
         self.direccion = [1, 1]
         self.radio = 10
-        self.x = [x[0] + 65, x[1] + 65]
+        self.x = self.xinicial[:]
         self.y = y - self.radio
         self.v = 0
         self.tiempo = 0
         self.angulo = [45, 45]
-        self.xmovimiento = [x[0], x[1]]
+        self.xmovimiento = x[:]
         self.ymovimiento = config.ANCHO - self.y
         self.disparando = [False, False]
         self.clock = pygame.time.Clock()
@@ -45,7 +46,10 @@ class Bala(pantallas.Pantalla):
         self.getTime = lambda: int(round(time.time() * 1000))
         self.tiempo_inicio = self.getTime()
         self.poder = poder.Power(1, 20, config.ANCHO - 2, 20, 250)
-        pygame.key.set_repeat(10, 5)
+        self.vidas = [
+                vida.Vida(1, 1, config.ANCHO / 2 - 2, 20, 100),
+                vida.Vida(config.ANCHO / 2 + 2, 1, config.ANCHO / 2 - 2, 20, 100)]
+        pygame.key.set_repeat(10, 1)
 
     def update(self):
         if not self.fin_partida:
@@ -71,6 +75,7 @@ class Bala(pantallas.Pantalla):
                 self.tiempo_inicio = self.getTime()
                 self.v = 0
                 self.disparando[self.turno] = False
+                self.cronometro.restart()
         else:
             # Ir a la pantalla que permite visualizar los resultados
             pass
@@ -89,7 +94,7 @@ class Bala(pantallas.Pantalla):
                             self.angulo[self.turno] += 1
                     elif event.key == K_SPACE:
                         if self.v < 250:
-                            self.v += 1
+                            self.v += 2
                     elif event.key == K_RIGHT:
                         if self.direccion[self.turno] < 0:
                             self.direccion[self.turno] = -self.direccion[self.turno]
@@ -102,25 +107,30 @@ class Bala(pantallas.Pantalla):
                         self.xinicial[self.turno] -= 10
                     elif event.key == K_RETURN:
                         self.disparando[self.turno] = True
-                        self.cronometro.restart()
                 if event.key == K_ESCAPE:
                     self.cronometro.fin = True
                     pygame.quit()
                     sys.exit()
                     pygame.event.pump()
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_SPACE] and self.v < 250:
-                self.v += 1
     def render(self):
         self.gestor.pantalla.blit(self.fondo, (0, 0))
         if self.disparando[self.turno]:
-            pygame.draw.circle(self.gestor.pantalla, (155, 155, 155), (int(self.x[self.turno]), int(self.y) + 50), self.radio)
+            pygame.draw.circle(self.gestor.pantalla,
+                    (155, 155, 155),
+                    (int(self.x[self.turno]), int(self.y) + 50),
+                    self.radio)
         for i in range(0, len(self.imagen_jugador)):
             if self.direccion[i] < 0:
-                self.gestor.pantalla.blit(self.imagen_jugador[i], (int(self.xinicial[i] - self.radio), self.yinicial))
+                self.gestor.pantalla.blit(self.imagen_jugador[i],
+                        (int(self.xinicial[i] - self.radio),
+                            self.yinicial))
             else :
-                self.gestor.pantalla.blit(pygame.transform.flip(self.imagen_jugador[i], True, False), (int(self.xinicial[i] - self.radio), self.yinicial))
+                self.gestor.pantalla.blit(
+                        pygame.transform.flip(self.imagen_jugador[i], True, False),
+                        (int(self.xinicial[i] - self.radio), self.yinicial))
         self.gestor.pantalla.blit(self.piso, (0, 550))
+        for i in self.vidas:
+            i.draw(self.gestor.pantalla)
         self.poder.draw(self.gestor.pantalla)
         # self.barra.draw(self.gestor.pantalla)
         pygame.display.update()
