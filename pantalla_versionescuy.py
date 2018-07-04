@@ -20,19 +20,19 @@ class Cuy(pantallas.PantallaJugador):
         pygame.display.set_caption("listacuy")
 
 #Personaje CUY
-        self.personajeCuy = pygame.image.load("Imagenes/Personaje/CuyOriginal.png")
+        self.personajeCuy = pygame.image.load(config.avatar[5])
         self.posX_PC,self.posY_PC=150,100 #Posicion personaje cuy
         self.seleccionarCuy = boton.Button(150,200,140,40, text = 'CuyBase')
 
-        self.personajeCuy1 = pygame.image.load("Imagenes/Personaje/cuy-v1.png")
+        self.personajeCuy1 = pygame.image.load(config.avatar[4])
         self.posX_PC1,self.posY_PC1=150,250
         self.seleccionarC1 = boton.Button(150,350,140,40, text = 'CuyV1')
 
-        self.personajeCuy2 = pygame.image.load("Imagenes/Personaje/cuy-v2.png")
+        self.personajeCuy2 = pygame.image.load(config.avatar[7])
         self.posX_PC2,self.posY_PC2=500,100
         self.seleccionarC2 = boton.Button(500,200,140,40, text = 'CuyV2')
 
-        self.personajeCuy3 = pygame.image.load("Imagenes/Personaje/cuy-v3.png")
+        self.personajeCuy3 = pygame.image.load(config.avatar[2])
         self.posX_PC3,self.posY_PC3=500,250
         self.seleccionarC3 = boton.Button(500,350,140,40, text = 'CuyV3')
 
@@ -45,7 +45,7 @@ class Cuy(pantallas.PantallaJugador):
         self.seleccionado = False #Flag para saber si ya se selecciono un cuy
 
         self.sesion = sesion.Sesion.get_instance()
-        self.personaje = None
+        self.personaje = None #guardar ruta del personaje
 
     def get_input(self):
         for event in pygame.event.get():
@@ -64,12 +64,15 @@ class Cuy(pantallas.PantallaJugador):
 
     def update(self):  #CAMBIA ESTO!
         if self.seleccionarC1.active: #si se selecciona la primera version
+            self.personaje = pygame.image.load(config.avatar[4])
             self.personajeCuy = self.personajeCuy1 #el personaje cambia a primera version
             self.seleccionado = True
         elif self.seleccionarC2.active:
+            self.personaje = pygame.image.load(config.avatar[7]) #desde config
             self.personajeCuy = self.personajeCuy2
             self.seleccionado = True
         elif self.seleccionarC3.active:
+            self.personaje = pygame.image.load(config.avatar[2])
             self.personajeCuy = self.personajeCuy3
             self.seleccionado = True
 
@@ -101,7 +104,7 @@ class Cuy(pantallas.PantallaJugador):
             self.ventana.blit(self.personajeCuy, (self.posX_PC,self.posY_PC))
 
         if self.reset.active:
-            self.personajeCuy = pygame.image.load("Imagenes/Personaje/CuyOriginal.png") #para que se resetee el personaje
+            self.personajeCuy = pygame.image.load(config.avatar[5]) #para que se resetee el personaje
             self.seleccionado = False
         if self.atras.active:
             self.gestor.pantalla_actual.ir_personajes() #si presiona atras va para escoger personajes
