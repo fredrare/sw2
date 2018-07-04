@@ -21,19 +21,19 @@ class Gallo(pantallas.PantallaJugador):
         pygame.display.set_caption("listapersonalizacion")
 
 #Personaje GALLITO
-        self.personajeGallito = pygame.image.load("Imagenes/Personaje/GallitoOriginal.png")
+        self.personajeGallito = pygame.image.load(config.avatar[0])
         self.posX_PG,self.posY_PG=150,100 #Posicion personaje Gallito
         self.seleccionarGallito = boton.Button(150,200,140,40, text = 'GallitoBase')
 
-        self.personajeGallito1 = pygame.image.load("Imagenes/Personaje/Gallito-v1.png")
+        self.personajeGallito1 = pygame.image.load(config.avatar[8])
         self.posX_PG1,self.posY_PG1=150,250
         self.seleccionarG1 = boton.Button(150,350,140,40, text = 'GallitoV1')
 
-        self.personajeGallito2 = pygame.image.load("Imagenes/Personaje/Gallito-v2.png")
+        self.personajeGallito2 = pygame.image.load(config.avatar[11])
         self.posX_PG2,self.posY_PG2=500,250
         self.seleccionarG2 = boton.Button(500,200,140,40, text = 'GallitoV2')
 
-        self.personajeGallito3 = pygame.image.load("Imagenes/Personaje/Gallito-v3.png")
+        self.personajeGallito3 = pygame.image.load(config.avatar[14])
         self.posX_PG3,self.posY_PG3=500,100
         self.seleccionarG3 = boton.Button(500,350,140,40, text = 'GallitoV3')
 
