@@ -23,19 +23,19 @@ class Personajes(pantallas.PantallaJugador):
 
         self.elegido = pygame.image.load("Imagenes/peru.jpg")#iniciar con ninguno default peru
 
-        self.personaje1 = pygame.image.load("Imagenes/Personaje/CuyOriginal.png")
+        self.personaje1 = pygame.image.load(config.avatar['c0'])
         self.posX_P1,self.posY_P1=150,100
         self.seleccionar1 = boton.Button(150,200,140,40, text = 'Cuy')
 
-        self.personaje2 = pygame.image.load("Imagenes/Personaje/GallitoOriginal.png")
+        self.personaje2 = pygame.image.load(config.avatar['g0'])
         self.posX_P2,self.posY_P2=150,250
         self.seleccionar2 = boton.Button(150,350,140,40, text = 'Gallito')
 
-        self.personaje3 = pygame.image.load("Imagenes/Personaje/LlamaOriginal.png")
+        self.personaje3 = pygame.image.load(config.avatar['l0'])
         self.posX_P3,self.posY_P3=500,250
         self.seleccionar3 = boton.Button(500,350,140,40, text = 'Llama')
 
-        self.personaje4 = pygame.image.load("Imagenes/Personaje/PerroOriginal.png")
+        self.personaje4 = pygame.image.load(config.avatar['p0'])
         self.posX_P4,self.posY_P4=500,100
         self.seleccionar4 = boton.Button(500,200,140,40, text = 'Perro')
 
@@ -97,9 +97,7 @@ class Personajes(pantallas.PantallaJugador):
             self.ventana.blit(self.personaje4, (self.posX_P4,self.posY_P4))
 
         if self.atras.active:
-            pygame.quit()
-            sys.exit()
-            #self.gestor.pantalla_actual.ir_lobby() #si presiona atras va para el lobby
+            self.gestor.pantalla_actual.ir_sala() #si presiona atras va para el lobby
         if self.salir.active:
             pygame.quit()
             sys.exit()
@@ -117,6 +115,9 @@ class Personajes(pantallas.PantallaJugador):
 
     def ir_personalizarperro(self):
         self.gestor.pantalla_actual = pantalla_versionesperro.Perro(self.gestor)
+
+    def ir_sala(self):
+        self.gestor.pantalla_actual = pantalla.sala.PantallaSala(self)
 
 
 

@@ -21,19 +21,19 @@ class Perro(pantallas.PantallaJugador):
         pygame.display.set_caption("listapersonalizacion")
 
 #Personaje PERRO
-        self.personajePerro = pygame.image.load("Imagenes/Personaje/PerroOriginal.png")
+        self.personajePerro = pygame.image.load(config.avatar['p0'])
         self.posX_PP,self.posY_PP=150,100 #Posicion personaje perro
         self.seleccionarPerro = boton.Button(150,200,140,40, text = 'PerroBase')
 
-        self.personajePerro1 = pygame.image.load("Imagenes/Personaje/Perro-v1.png")
+        self.personajePerro1 = pygame.image.load(config.avatar['p1'])
         self.posX_PP1,self.posY_PP1=150,250
         self.seleccionarP1 = boton.Button(150,350,140,40, text = 'PerroV1')
 
-        self.personajePerro2 = pygame.image.load("Imagenes/Personaje/Perro-v2.png")
+        self.personajePerro2 = pygame.image.load(config.avatar['p2'])
         self.posX_PP2,self.posY_PP2=500,100
         self.seleccionarP2 = boton.Button(500,200,140,40, text = 'PerroV2')
 
-        self.personajePerro3 = pygame.image.load("Imagenes/Personaje/Perro-v3.png")
+        self.personajePerro3 = pygame.image.load(config.avatar['p3'])
         self.posX_PP3,self.posY_PP3=500,250
         self.seleccionarP3 = boton.Button(500,350,140,40, text = 'PerroV3')
 
@@ -66,12 +66,15 @@ class Perro(pantallas.PantallaJugador):
     def update(self):
 
         if self.seleccionarP1.active:
+            self.personaje = pygame.image.load(config.avatar['p1'])
             self.personajePerro = self.personajePerro1
             self.seleccionado =  True
         elif self.seleccionarP2.active:
+            self.personaje = pygame.image.load(config.avatar['p2'])
             self.personajePerro = self.personajePerro2
             self.seleccionado =  True
         elif self.seleccionarP3.active:
+            self.personaje = pygame.image.load(config.avatar['p3'])
             self.personajePerro = self.personajePerro3
             self.seleccionado =  True
 
@@ -103,7 +106,7 @@ class Perro(pantallas.PantallaJugador):
             self.ventana.blit(self.personajePerro3, (self.posX_PP3,self.posY_PP3))
 
         if self.reset.active:
-            self.personajePerro = pygame.image.load("Imagenes/Personaje/PerroOriginal.png") #para que se resetee el personaje
+            self.personajePerro = config.avatar['p0'] #para que se resetee el personaje
             self.seleccionado = False
         if self.atras.active:
             self.gestor.pantalla_actual.ir_personajes() #si presiona atras va para escoger personajes
