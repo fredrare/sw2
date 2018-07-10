@@ -11,7 +11,7 @@ class Vida:
         self.limit = limit
         self.frame = pygame.Rect(x, y, width, height)
         self.life = pygame.Rect(x + 5, y + 5, width - 2, height - 8)
-        self.ammount = limit
+        self.ammount = limit / 5
         self.life.w = self.ammount * (self.width - 2) / self.limit
 
     def update(self, hit):

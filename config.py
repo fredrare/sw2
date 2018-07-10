@@ -4,6 +4,13 @@ ALTO = 600
 
 BACKGROUND_COLOR = (255, 83, 13)
 
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+GREEN = (0, 255, 0)
+TURQUOISE = (0, 255, 255)
+BLUE = (0, 0, 255)
+PURPLE = (255, 0, 255)
+
 text_input_inactive = (200, 200, 200)
 text_input_active = (255, 255, 255)
 
