@@ -3,15 +3,7 @@
 import pygame
 import config
 import pantalla_sala
-#<<<<<<< HEAD
-import pantalla_personajes
-import pantalla_versionescuy
-import pantalla_versionesllama
-import pantalla_versionesperro
-import pantalla_versionesgallito
-#=======
-
-import pantalla_registro
+import pantalla_admin_lobby
 #import pantalla_personajes
 #>>>>>>> f95a88a630b7d5298c90fd8a9ec92921388bcbd0
 # Definir métodos
@@ -24,7 +16,7 @@ class GestorPantallas:
         pygame.init()
         self.pantalla = pygame.display.set_mode(dimensiones)
         self.superficie = pygame.Surface(self.pantalla.get_size())
-        self.pantalla_actual = pantalla_personajes.Personajes(self)
+        self.pantalla_actual = pantalla_admin_lobby.PantallaAdmin(self)
 
     def comenzar(self):
         while True:
