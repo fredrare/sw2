@@ -33,7 +33,6 @@ class Bala(pantallas.Pantalla):
         self.disparando = [False, False]
         self.clock = pygame.time.Clock()
         self.fuente = pygame.font.Font(None, 15)
-        # self.barra = barravida.BarraVida(0, 0)
         self.bala = pygame.image.load(config.BALA)
         self.sesion = sesion.Sesion.get_instance()
         self.imagen_jugador = [pygame.image.load(self.sesion.avatar[0]),
@@ -61,7 +60,6 @@ class Bala(pantallas.Pantalla):
             vy = self.v * math.sin(math.radians(self.angulo[self.turno]))
             if self.disparando[self.turno]:
                 self.tiempo = (self.getTime() - self.tiempo_inicio) / 400.0
-                # self.tiempo += self.clock.tick() / 1000.0
                 self.xmovimiento[self.turno] = vx * self.tiempo
                 self.ymovimiento = vy * self.tiempo + (self.gravedad * self.tiempo ** 2 / 2)
                 self.x[self.turno] = self.xinicial[self.turno] + self.xmovimiento[self.turno]
@@ -127,7 +125,7 @@ class Bala(pantallas.Pantalla):
         if self.disparando[self.turno]:
             pygame.draw.circle(self.gestor.pantalla,
                     (155, 155, 155),
-                    (int(self.x[self.turno]), int(self.y) + 50),
+                    (int(self.x[self.turno]) + 50, int(self.y) + 50),
                     self.radio)
         for i in range(0, 2):
             self.angulos[i].draw(self.gestor.pantalla)
@@ -143,7 +141,6 @@ class Bala(pantallas.Pantalla):
         for i in self.vidas:
             i.draw(self.gestor.pantalla)
         self.poder.draw(self.gestor.pantalla)
-        # self.barra.draw(self.gestor.pantalla)
         pygame.display.update()
 
     def ir_login(self):
