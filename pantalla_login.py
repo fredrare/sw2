@@ -49,6 +49,7 @@ class PantallaLogin(pantallas.Pantalla):
             print(self.input_password.text)
             print(r._content)
             result = r.content.split('/')
+
             if result[0] == 'true':
                 '''if result[1] == 'admin':
                     self.gestor.pantalla_actual.ir_lobby_admin()
