@@ -77,7 +77,10 @@ class PantallaLogin(pantallas.Pantalla):
     def ir_lobby(self):
         print("Se va al Lobby")
         self.gestor.pantalla_actual = pantalla_lobby.PantallaLobby(self.gestor)
+<<<<<<< HEAD
         pass
+=======
+>>>>>>> ec347ad4fcdf3d822d9a7f0c78eb5a8bc4844326
     def ir_registro(self):
         self.gestor.pantalla_actual = pantalla_registro.PantallaRegistro(self.gestor)
     def ir_jugador(self):

@@ -6,6 +6,7 @@ import requests
 import boton
 import sys
 import bala
+<<<<<<< HEAD
 import pantalla_lobby
 import sesion
 import pantalla_versionescuy
@@ -14,6 +15,9 @@ import pantalla_versionesperro
 import pantalla_versionesgallito
 import pantalla_personajes
 #import bala
+=======
+import random
+>>>>>>> ec347ad4fcdf3d822d9a7f0c78eb5a8bc4844326
 
 class PantallaSala(pantallas.Pantalla):
 
@@ -30,6 +34,7 @@ class PantallaSala(pantallas.Pantalla):
         self.is_ready = False
         #self.derecha = True
         self.imagen_ready = pygame.image.load("Imagenes/ready.png")
+<<<<<<< HEAD
         #self.cambiar_equipo = boton.Button(400, 550, 100, 40, text = 'Cambiar')
         self.ready = boton.Button(350, 550, 100, 40, text = 'Ready')
         self.iniciar = boton.Button(350, 450, 100, 40, text = 'Iniciar')
@@ -37,6 +42,15 @@ class PantallaSala(pantallas.Pantalla):
         self.regresar = boton.Button(10, 550 , 100, 40, "Regresar")
         self.cambiar_fondo = boton.Button(330, 350, 160, 40, "Cambiar Fondo" )
         self.cambiar_piso = boton.Button(330, 250, 160, 40, "Cambiar Piso")
+=======
+        self.imagen_peru = pygame.image.load("Imagenes/peru.png")
+        self.postX = 650
+        self.postY = 600
+        self.cambiar_equipo = boton.Button(400, 550, 100, 40, text = 'Cambiar')
+        self.ready = boton.Button(300, 550, 100, 40, text = 'Ready')
+        self.entrar = boton.Button(360, 500, 100, 40, text = 'Iniciar')
+        self.velocidad = 2
+>>>>>>> ec347ad4fcdf3d822d9a7f0c78eb5a8bc4844326
 
         self.cambiar_personaje1 = boton.Button(150,250,160,40, "Cambiar Personaje")
         self.cambiar_personaje2 = boton.Button(500,250,160,40, "Cambiar Personaje")
@@ -48,6 +62,7 @@ class PantallaSala(pantallas.Pantalla):
                 sys.exit()
             #self.cambiar_equipo.handle_event(event)
             self.ready.handle_event(event)
+<<<<<<< HEAD
             self.salir.handle_event(event)
             self.regresar.handle_event(event)
             self.iniciar.handle_event(event)
@@ -55,6 +70,10 @@ class PantallaSala(pantallas.Pantalla):
             self.cambiar_piso.handle_event(event)
             self.cambiar_personaje1.handle_event(event)
             self.cambiar_personaje2.handle_event(event)
+=======
+            # self.salir.handle_event(event)
+            self.entrar.handle_event(event)
+>>>>>>> ec347ad4fcdf3d822d9a7f0c78eb5a8bc4844326
 
     def update(self):
         #if self.cambiar_equipo.active:
@@ -63,6 +82,7 @@ class PantallaSala(pantallas.Pantalla):
         if self.ready.active:
             self.is_ready = not self.is_ready
             self.ready.active = False
+<<<<<<< HEAD
             self.gestor.pantalla
         if self.salir.active:
             pygame.quit()
@@ -85,6 +105,30 @@ class PantallaSala(pantallas.Pantalla):
             self.gestor.pantalla_actual.ir_personaje()
             self.sesion.personaje = 1
             self.cambiar_personaje2.active = False
+=======
+        '''if self.salir.active:
+            pygame.quit()
+            sys.exit()'''
+        if self.dere == True:
+            if self.postX<800:
+                self.postX+=self.velocidad
+            else:
+                self.dere = False
+        else:
+            if self.postX>1:
+                self.postX-=self.velocidad
+            else:
+                self.dere = True
+        if self.entrar.active:
+            self.entrar.active = False
+            self.gestor.pantalla_actual.ir_juego()
+
+
+    def nuevopersonaje(self):
+        pass
+
+
+>>>>>>> ec347ad4fcdf3d822d9a7f0c78eb5a8bc4844326
 
     def render(self):
         self.gestor.pantalla.blit(self.fondo,(0,0))
@@ -103,6 +147,7 @@ class PantallaSala(pantallas.Pantalla):
             self.gestor.pantalla.blit(self.imagen_ready,(330,200))
         #self.cambiar_equipo.draw(self.gestor.pantalla)
         self.ready.draw(self.gestor.pantalla)
+<<<<<<< HEAD
         self.salir.draw(self.gestor.pantalla)
         self.iniciar.draw(self.gestor.pantalla)
         self.regresar.draw(self.gestor.pantalla)
@@ -110,6 +155,11 @@ class PantallaSala(pantallas.Pantalla):
         self.cambiar_piso.draw(self.gestor.pantalla)
         self.cambiar_personaje1.draw(self.gestor.pantalla)
         self.cambiar_personaje2.draw(self.gestor.pantalla)
+=======
+        self.entrar.draw(self.gestor.pantalla)
+        # self.salir.draw(self.gestor.pantalla)
+        self.gestor.pantalla.blit(self.imagen_peru,(self.postX,self.postY))
+>>>>>>> ec347ad4fcdf3d822d9a7f0c78eb5a8bc4844326
         pygame.display.update()
 
     def ir_bala(self):
@@ -122,5 +172,12 @@ class PantallaSala(pantallas.Pantalla):
         pass
     def ir_jugador(self):
         pass
+<<<<<<< HEAD
+=======
+    def ir_juego(self):
+        self.gestor.pantalla_actual = bala.Bala(self.gestor, random.randint(0, config.ANCHO), config.ALTO)
+        print("entra")
+
+>>>>>>> ec347ad4fcdf3d822d9a7f0c78eb5a8bc4844326
     def ir_admin(self):
         pass
