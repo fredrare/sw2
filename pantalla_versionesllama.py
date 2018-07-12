@@ -64,15 +64,15 @@ class Llama(pantallas.PantallaJugador):
 
     def update(self):
         if self.seleccionarL1.active:
-            self.personaje = pygame.image.load(config.avatar['l1'])
+            self.personaje = config.avatar['l1']
             self.personajeLlama = self.personajeLlama1
             self.seleccionado = True
         elif self.seleccionarL2.active:
-            self.personaje = pygame.image.load(config.avatar['l2'])
+            self.personaje = config.avatar['l2']
             self.personajeLlama = self.personajeLlama2
             self.seleccionado = True
         elif self.seleccionarL3.active:
-            self.personaje = pygame.image.load(config.avatar['l3'])
+            self.personaje = config.avatar['l3']
             self.personajeLlama = self.personajeLlama3
             self.seleccionado = True
 

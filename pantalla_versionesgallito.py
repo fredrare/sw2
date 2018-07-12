@@ -66,15 +66,15 @@ class Gallo(pantallas.PantallaJugador):
 
     def update(self):
         if self.seleccionarG1.active: #si se selecciona la primera version
-            self.personaje = pygame.image.load(config.avatar['g1'])
+            self.personaje = config.avatar['g1']
             self.personajeGallito = self.personajeGallito1 #el personaje cambia a primera version
             self.seleccionado = True #cambiar flag a true
         elif self.seleccionarG2.active:
-            self.personaje = pygame.image.load(config.avatar['g2'])
+            self.personaje = config.avatar['g2']
             self.personajeGallito = self.personajeGallito2
             self.seleccionado = True
         elif self.seleccionarG3.active:
-            self.personaje = pygame.image.load(config.avatar['g3'])
+            self.personaje = config.avatar['g3']
             self.personajeGallito = self.personajeGallito3
             self.seleccionado = True
 

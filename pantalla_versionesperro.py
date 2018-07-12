@@ -66,15 +66,15 @@ class Perro(pantallas.PantallaJugador):
     def update(self):
 
         if self.seleccionarP1.active:
-            self.personaje = pygame.image.load(config.avatar['p1'])
+            self.personaje = config.avatar['p1']
             self.personajePerro = self.personajePerro1
             self.seleccionado =  True
         elif self.seleccionarP2.active:
-            self.personaje = pygame.image.load(config.avatar['p2'])
+            self.personaje = config.avatar['p2']
             self.personajePerro = self.personajePerro2
             self.seleccionado =  True
         elif self.seleccionarP3.active:
-            self.personaje = pygame.image.load(config.avatar['p3'])
+            self.personaje = config.avatar['p3']
             self.personajePerro = self.personajePerro3
             self.seleccionado =  True
 
