@@ -64,15 +64,15 @@ class Cuy(pantallas.PantallaJugador):
 
     def update(self):
         if self.seleccionarC1.active: #si se selecciona la primera version
-            self.personaje = pygame.image.load(config.avatar['c1'])
+            self.personaje = config.avatar['c1']
             self.personajeCuy = self.personajeCuy1 #el personaje cambia a primera version
             self.seleccionado = True
         elif self.seleccionarC2.active:
-            self.personaje = pygame.image.load(config.avatar['c2']) #desde config
+            self.personaje = config.avatar['c2'] #desde config
             self.personajeCuy = self.personajeCuy2
             self.seleccionado = True
         elif self.seleccionarC3.active:
-            self.personaje = pygame.image.load(config.avatar['c3'])
+            self.personaje = config.avatar['c3']
             self.personajeCuy = self.personajeCuy3
             self.seleccionado = True
 
@@ -121,3 +121,4 @@ class Cuy(pantallas.PantallaJugador):
 
     def ir_personajes(self):
         self.gestor.pantalla_actual = pantalla_personajes.Personajes(self.gestor)
+

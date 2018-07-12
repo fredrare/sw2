@@ -10,6 +10,7 @@ import sesion
 import random
 import vida
 import turnos
+import model_vida
 from pygame.locals import *
 
 class Bala(pantallas.Pantalla):
@@ -33,14 +34,13 @@ class Bala(pantallas.Pantalla):
         self.disparando = [False, False]
         self.clock = pygame.time.Clock()
         self.fuente = pygame.font.Font(None, 15)
-        # self.barra = barravida.BarraVida(0, 0)
         self.bala = pygame.image.load(config.BALA)
         self.sesion = sesion.Sesion.get_instance()
         self.imagen_jugador = [pygame.image.load(self.sesion.avatar[0]),
                 pygame.image.load(self.sesion.avatar[1])]
         self.fondo = pygame.image.load(self.sesion.fondo)
         self.piso = pygame.image.load(self.sesion.piso)
-        self.cronometro = turnos.Cronometro()
+        self.cronometro = turnos.Cronometro.get_instance()
         self.turno = 0
         self.gravedad = -50
         self.getTime = lambda: int(round(time.time() * 1000))
@@ -51,22 +51,25 @@ class Bala(pantallas.Pantalla):
                 vida.Vida(config.ANCHO / 2 + 2, 1, config.ANCHO / 2 - 2, 20, 100)]
         self.angulos = [angulo.Angle(i, config.ALTO - 100)
                 for i in self.xinicial]
+        self.model = model_vida.ModelVida(self.xinicial[0], self.xinicial[1])
         pygame.key.set_repeat(10, 1)
 
     def update(self):
         if not self.fin_partida:
+            self.model.update(self.xinicial[0], self.xinicial[1])
             self.poder.update(self.v)
             self.turno = 0 if self.cronometro.turno else 1
             vx = self.v * math.cos(math.radians(self.angulo[self.turno])) * self.direccion[self.turno]
             vy = self.v * math.sin(math.radians(self.angulo[self.turno]))
             if self.disparando[self.turno]:
                 self.tiempo = (self.getTime() - self.tiempo_inicio) / 400.0
-                # self.tiempo += self.clock.tick() / 1000.0
                 self.xmovimiento[self.turno] = vx * self.tiempo
                 self.ymovimiento = vy * self.tiempo + (self.gravedad * self.tiempo ** 2 / 2)
                 self.x[self.turno] = self.xinicial[self.turno] + self.xmovimiento[self.turno]
                 self.y = self.yinicial - self.ymovimiento
-                if (self.x[self.turno] > config.ANCHO) or (self.y > config.ALTO):
+                hit = self.model.colision(self.x[0], self.y, self.x[1], self.y)
+                if hit > 0 or (self.x[self.turno] > config.ANCHO) or (self.y > config.ALTO):
+                    self.vidas[1 - self.turno].update(hit)
                     self.x[self.turno] = self.xinicial[self.turno]
                     self.y = self.yinicial
                     self.tiempo = 0
@@ -127,7 +130,7 @@ class Bala(pantallas.Pantalla):
         if self.disparando[self.turno]:
             pygame.draw.circle(self.gestor.pantalla,
                     (155, 155, 155),
-                    (int(self.x[self.turno]), int(self.y) + 50),
+                    (int(self.x[self.turno]) + 50, int(self.y) + 50),
                     self.radio)
         for i in range(0, 2):
             self.angulos[i].draw(self.gestor.pantalla)
@@ -143,7 +146,6 @@ class Bala(pantallas.Pantalla):
         for i in self.vidas:
             i.draw(self.gestor.pantalla)
         self.poder.draw(self.gestor.pantalla)
-        # self.barra.draw(self.gestor.pantalla)
         pygame.display.update()
 
     def ir_login(self):
