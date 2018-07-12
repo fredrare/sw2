@@ -2,6 +2,7 @@ import threading
 import time
 
 class Cronometro:
+    instance = None
     def __init__(self):
         self.fin = False
         self.turno = True
@@ -9,6 +10,12 @@ class Cronometro:
         hilo = threading.Thread(target = self.temporizar, args = (), kwargs = {})
         hilo.daemon = True
         hilo.start()
+
+    @classmethod
+    def get_instance(cls):
+        if cls.instance is None:
+            cls.instance = Cronometro()
+        return cls.instance
 
     def temporizar(self):
         while not self.fin:
