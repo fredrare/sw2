@@ -9,9 +9,9 @@ class Sesion:
         self.vida = [vida, vida]
         self.piso = piso
         self.fondo = fondo
+        self.ganador = 1
     @classmethod
     def get_instance(cls):
         if cls.instance is None:
             cls.instance = Sesion()
         return cls.instance
-

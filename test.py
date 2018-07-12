@@ -4,6 +4,7 @@ import pygame
 import config
 import pantalla_sala
 import pantalla_admin_lobby
+import pantalla_resultados
 #import pantalla_personajes
 #>>>>>>> f95a88a630b7d5298c90fd8a9ec92921388bcbd0
 # Definir métodos
@@ -16,7 +17,8 @@ class GestorPantallas:
         pygame.init()
         self.pantalla = pygame.display.set_mode(dimensiones)
         self.superficie = pygame.Surface(self.pantalla.get_size())
-        self.pantalla_actual = pantalla_admin_lobby.PantallaAdmin(self)
+        #self.pantalla_actual = pantalla_admin_lobby.PantallaAdmin(self)
+        self.pantalla_actual = pantalla_resultados.PantallaResultados(self)
 
     def comenzar(self):
         while True:
