@@ -17,8 +17,8 @@ class GestorPantallas:
         pygame.init()
         self.pantalla = pygame.display.set_mode(dimensiones)
         self.superficie = pygame.Surface(self.pantalla.get_size())
-        #self.pantalla_actual = pantalla_admin_lobby.PantallaAdmin(self)
-        self.pantalla_actual = pantalla_resultados.PantallaResultados(self)
+        self.pantalla_actual = pantalla_admin_lobby.PantallaAdmin(self)
+        #self.pantalla_actual = pantalla_resultados.PantallaResultados(self)
 
     def comenzar(self):
         while True:
