@@ -1,4 +1,5 @@
 import pygame
+import pantalla_resultados
 import time
 import sys
 import math
@@ -77,13 +78,16 @@ class Bala(pantallas.Pantalla):
                     self.v = 0
                     self.disparando[self.turno] = False
                     self.cronometro.restart()
+                    if self.vidas[1 - self.turno].ammount <= 0:
+                        self.sesion.ganador = self.turno
+                        self.fin_partida = True
             else:
                 self.tiempo_inicio = self.getTime()
                 self.angulos[self.turno].update(self.angulo[self.turno],
                         self.xinicial[self.turno])
         else:
             # Ir a la pantalla que permite visualizar los resultados
-            pass
+            self.ir_resultados()
 
     def key_pressed(self, key):
         if not self.disparando[self.turno]:
@@ -150,6 +154,9 @@ class Bala(pantallas.Pantalla):
 
     def ir_login(self):
         pass
+
+    def ir_resultados(self):
+        self.gestor.pantalla_actual = pantalla_resultados.PantallaResultados(self.gestor)
 
     def ir_jugador(self):
         pass
