@@ -6,6 +6,8 @@ import sys
 import pantalla_admin_lobby
 import obtener_datos
 import text_input
+import requests
+
 class PantallaBaneo(pantallas.Pantalla):
     def __init__(self,gestor):
         self.gestor = gestor
@@ -38,6 +40,7 @@ class PantallaBaneo(pantallas.Pantalla):
             self.gestor.pantalla_actual.ir_adminlobby()
             self.regresar.active = False
         if self.banear.active:
+            requests.get('http://165.227.76.18:3000/ban?username=' +self.input_usuario.text)
             self.gestor.pantalla_actual.ir_adminlobby()
             self.banear.active = False
 
