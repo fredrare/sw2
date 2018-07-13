@@ -13,6 +13,11 @@ class PantallaAdmin(pantallas.Pantalla):
 
         self.fondo = pygame.image.load(config.fondo[0])
 
+        self.llama = pygame.image.load(config.avatar['l0'])
+        self.perro = pygame.image.load(config.avatar['p1'])
+        self.gallo = pygame.image.load(config.avatar['g2'])
+        self.cuy = pygame.image.load(config.avatar['c3'])
+
         self.banear = boton.Button(400,300,100,40, "Banear")
         self.salir = boton.Button(700, 550 , 100, 40, "Salir")
         self.tiempo = boton.Button(250, 300 , 100, 40, "Tiempo")
@@ -41,6 +46,11 @@ class PantallaAdmin(pantallas.Pantalla):
 
     def render(self):
         self.gestor.pantalla.blit(self.fondo,(0,0))
+
+        self.gestor.pantalla.blit(self.llama, (125, 100))
+        self.gestor.pantalla.blit(self.perro, (275, 100))
+        self.gestor.pantalla.blit(self.gallo, (425, 100))
+        self.gestor.pantalla.blit(self.cuy, (575, 100))
 
         self.banear.draw(self.gestor.pantalla)
         self.salir.draw(self.gestor.pantalla)
